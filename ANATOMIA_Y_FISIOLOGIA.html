@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="vitals">
+  <title>Portafolio Digital: Anatomía, Fisiología y Nutrición Aplicada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Vitals) */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Semantic & Focus */
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+
+      /* Narrative Type Scale */
+      --display-size: clamp(2.15rem, 1.35rem + 3.1vw, 3.35rem);
+      --headline-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.15rem);
+      --subhead-size: clamp(1.15rem, 1.02rem + 0.5vw, 1.4rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.22vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.14vw, 0.8125rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.62;
+    }
+    header { position: static !important; }
+
+    .page-shell {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-xl);
+      padding: var(--space-xl) var(--space-lg) var(--space-3xl);
+      max-width: 1180px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+      letter-spacing: -0.015em;
+    }
+
+    .kicker {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--primary);
+      display: inline-block;
+      margin-bottom: var(--space-sm);
+    }
+
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      line-height: 1.08;
+      max-width: 24ch;
+    }
+
+    .lede {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 64ch;
+      margin: var(--space-md) 0 0;
+    }
+
+    .section-title {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: 0 0 var(--space-lg);
+    }
+
+    .activity-title {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--space-xs);
+    }
+
+    .prose {
+      max-width: 65ch;
+      margin: 0 0 var(--space-md);
+      color: var(--on-surface);
+    }
+
+    /* Navigation bar */
+    .portfolio-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) 0;
+      border-top: var(--card-border);
+      border-bottom: var(--card-border);
+      margin-top: var(--space-lg);
+    }
+
+    .nav-link {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      border-bottom: 3px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .nav-link:hover {
+      background-color: var(--surface-container-low);
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background-color: var(--surface-container-low);
+    }
+
+    /* Key figures row */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    .status-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+    .status-card[data-status="warn"] { border-left-color: var(--warning); }
+
+    .metric-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .metric-value {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      display: block;
+    }
+
+    .metric-caption {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      margin-top: var(--space-xs);
+      display: block;
+    }
+
+    /* Chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background: color-mix(in srgb, var(--tertiary) 14%, var(--background));
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+    .chip[data-status="info"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="alert"] {
+      background: color-mix(in srgb, var(--error) 10%, var(--background));
+      color: var(--error);
+    }
+    .chip[data-status="warn"] {
+      background: color-mix(in srgb, var(--warning) 14%, var(--background));
+      color: var(--on-surface);
+    }
+
+    /* Unit band / Section containers */
+    .unit-section {
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--outline-variant);
+    }
+
+    .unit-band {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      border: var(--card-border);
+      display: grid;
+      gap: var(--space-xl);
+    }
+
+    /* Activity card */
+    .activity-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--card-lift);
+      display: grid;
+      gap: var(--space-lg);
+      container-type: inline-size;
+    }
+
+    .activity-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--card-border);
+    }
+
+    .activity-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    @container (max-width: 780px) {
+      .activity-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Interactive Evidence Panel */
+    .evidence-stage {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .evidence-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    .btn-tab {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background: var(--background);
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-tab:hover {
+      background: var(--surface-container);
+      color: var(--on-primary-container);
+    }
+
+    .btn-tab[aria-pressed="true"],
+    .btn-tab.is-active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .svg-frame {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-sm);
+      width: 100%;
+    }
+
+    .svg-frame svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .inspector-box {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+
+    .inspector-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--on-primary-container);
+      margin: 0 0 var(--space-xs);
+    }
+
+    .inspector-text {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    /* Critical analysis column */
+    .analysis-panel {
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+    }
+
+    .analysis-box {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--tertiary);
+      border-radius: var(--rounded);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .analysis-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary);
+      margin: 0 0 var(--space-sm);
+    }
+
+    .analysis-prose {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.62;
+      color: var(--on-surface);
+      max-width: 65ch;
+    }
+
+    .concept-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .concept-list li {
+      font-size: 0.925rem;
+      color: var(--on-surface-variant);
+      padding-left: var(--space-md);
+      position: relative;
+    }
+
+    .concept-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      border-radius: var(--rounded-full);
+      background: var(--primary);
+    }
+
+    /* Reflection Section */
+    .reflection-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .premise-callout {
+      background: var(--primary-container);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--on-primary-container);
+      margin-bottom: var(--space-lg);
+    }
+
+    .premise-callout p {
+      margin: var(--space-xs) 0 0;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    /* 9-Region Grid interactive */
+    .abdomen-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    .region-grid-ui {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-xs);
+    }
+
+    .region-btn {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.78rem;
+      line-height: 1.25;
+      min-height: 54px;
+      padding: var(--space-xs);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+
+    .region-btn:hover {
+      background: var(--surface-container);
+    }
+
+    .region-btn.is-active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Slider & Coronary simulator */
+    .control-group {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .control-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--on-surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--primary);
+      min-height: 44px;
+      cursor: pointer;
+    }
+
+    /* Data table for 7 foods */
+    .data-table-wrap {
+      overflow-x: auto;
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+    }
+
+    table.clinical-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    table.clinical-table th {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    table.clinical-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+      vertical-align: top;
+    }
+
+    table.clinical-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .num-cell {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* Gowin Vee styling */
+    .gowin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+
+    .gowin-center {
+      grid-column: 1 / -1;
+      background: var(--primary-container);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      border-left: var(--status-bar-width) solid var(--primary);
+    }
+
+    .gowin-wing {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-sm);
+      align-content: start;
+    }
+
+    .gowin-wing h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--on-primary-container);
+      border-bottom: var(--card-border);
+      padding-bottom: var(--space-xs);
+    }
+
+    .gowin-event {
+      grid-column: 1 / -1;
+      background: color-mix(in srgb, var(--tertiary) 10%, var(--background));
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--tertiary);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    /* References APA 7 */
+    .apa-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .apa-list li {
+      padding-left: 2rem;
+      text-indent: -2rem;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .apa-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive layout shifts */
+    @media (max-width: 900px) {
+      .reflection-layout {
+        grid-template-columns: 1fr;
+      }
+      .abdomen-wrap {
+        grid-template-columns: 1fr;
+      }
+      .gowin-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+        padding: var(--space-md);
+      }
+      .unit-band,
+      .activity-card {
+        padding: var(--space-md);
+      }
+      .nav-link {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="page-grid">
+
+      <!-- HEADER -->
+      <header>
+        <span class="kicker">Portafolio integrador · Anatomía y Fisiología I · Unidades 1 a 4</span>
+        <h1 class="title">Portafolio Digital: Anatomía, Fisiología y Nutrición Aplicada</h1>
+        <p class="lede">
+          Recorrido morfofuncional e interactivo por las cuatro unidades del curso: desde la precisión geométrica de la planimetría y la especialización tisular hasta la hemodinámica cardíaca y la hematosis alveolar que sostienen el metabolismo de los nutrientes.
+        </p>
+
+        <div class="metrics-grid">
+          <div class="status-card" data-status="info">
+            <span class="metric-label">Arquitectura del curso</span>
+            <span class="metric-value">4 Unidades</span>
+            <span class="metric-caption">Planimetría, histología, cardiovascular y respiratorio</span>
+          </div>
+          <div class="status-card" data-status="ok">
+            <span class="metric-label">Evidencias seleccionadas</span>
+            <span class="metric-value">8 Actividades</span>
+            <span class="metric-caption">Esquemas interactivos y análisis crítico integrado</span>
+          </div>
+          <div class="status-card" data-status="info">
+            <span class="metric-label">Gasto cardíaco diario</span>
+            <span class="metric-value">~7,000 L/día</span>
+            <span class="metric-caption">Más de 100,000 latidos distribuyendo O₂ y sustratos</span>
+          </div>
+          <div class="status-card" data-status="ok">
+            <span class="metric-label">Superficie alveolar</span>
+            <span class="metric-value">&gt; 200 m²</span>
+            <span class="metric-caption">400 millones de alvéolos adultos para intercambio gaseoso</span>
+          </div>
+        </div>
+
+        <nav class="portfolio-nav" aria-label="Navegación principal del portafolio">
+          <a href="#reflexion" class="nav-link active" onclick="setActiveNav(this)">Reflexión Integradora</a>
+          <a href="#unidad-1" class="nav-link" onclick="setActiveNav(this)">Unidad 1 · Planimetría</a>
+          <a href="#unidad-2" class="nav-link" onclick="setActiveNav(this)">Unidad 2 · Histología</a>
+          <a href="#unidad-3" class="nav-link" onclick="setActiveNav(this)">Unidad 3 · Cardiovascular</a>
+          <a href="#unidad-4" class="nav-link" onclick="setActiveNav(this)">Unidad 4 · Respiratorio</a>
+          <a href="#referencias" class="nav-link" onclick="setActiveNav(this)">Referencias APA 7</a>
+        </nav>
+      </header>
+
+      <!-- REFLEXIÓN ANALÍTICA INTEGRADORA -->
+      <section id="reflexion" class="unit-section reveal">
+        <span class="kicker">Eje vertebrador del portafolio</span>
+        <h2 class="section-title">De la topografía corporal a la oxidación celular del nutriente</h2>
+        <p class="section-subtitle">
+          Articulación teórica y clínica entre la organización espacial del cuerpo, la arquitectura microscópica de sus tejidos y el acoplamiento cardiorrespiratorio.
+        </p>
+
+        <div class="premise-callout">
+          <span class="metric-label">Premisa central de análisis</span>
+          <p>
+            ¿De qué manera la precisión espacial de la anatomía y la planimetría (Unidad 1) nos permite comprender la función metabólica y estructural de los diferentes tejidos (Unidad 2), y cómo la integración de los sistemas cardiovascular (Unidad 3) y respiratorio (Unidad 4) garantiza el transporte y la oxidación celular de los nutrientes que prescribimos en la dieta?
+          </p>
+        </div>
+
+        <div class="reflection-layout">
+          <div>
+            <p class="prose">
+              Desde que Andrés Vesalio revolucionó la disciplina en el Renacimiento al sustituir la mera descripción morfológica por el estudio de la relación indisoluble entre estructura y función (Doc Angeloc, s. f.; Moore, 2002), la anatomía dejó de ser un inventario estático para convertirse en el mapa operativo de la fisiología. La precisión espacial que aportan los planos y ejes anatómicos en la Unidad 1 permite orientar con exactitud dónde ocurre cada transformación biológica: delimita los compartimentos torácico y abdominopélvico, define qué estructuras se sitúan proximales o distales respecto al eje axial y explica cómo la disposición topográfica del estómago, el páncreas, el hígado y los tres metros y medio del intestino delgado condiciona el tránsito, la emulsión lipídica y la absorción secuencial de los alimentos (Zapata Mira, s. f.).
+            </p>
+            <p class="prose">
+              Esa cartografía macroscópica cobra sentido metabólico al descender a la escala microscópica de la Unidad 2, inaugurada históricamente por Marcello Malpighi (Doc Angeloc, s. f.). Cada región anatómica alberga tejidos cuyas propiedades mecánicas y bioquímicas responden a su ubicación: el epitelio intestinal plegado en vellosidades maximiza la superficie absortiva, mientras la mucosa gástrica actúa como barrera frente al ácido clorhídrico; por debajo, el tejido conjuntivo laxo y denso sostiene vasos e intercambia moléculas mediante su matriz extracelular rica en proteoglucanos y colágeno, el tejido adiposo almacena triglicéridos como reserva energética y la sangre —tejido conjuntivo especializado— vehiculiza albúmina, lípidos, azúcares y minerales disueltos en plasma (Fortoul, 2013; Welsch, 2014; Valdez Saenz, 2015). Asimismo, la masa muscular esquelética, lisa y cardíaca convierte la energía química en trabajo mecánico y determina el gasto energético basal que orienta toda prescripción dietética (RC Med, s. f.; Gil, 2010).
+            </p>
+            <p class="prose">
+              Sin embargo, ningún macronutriente absorbido en la lámina propia intestinal puede rendir trifosfato de adenosina (ATP) sin el acoplamiento continuo de los sistemas cardiovascular (Unidad 3) y respiratorio (Unidad 4). William Harvey demostró que la sangre recorre un circuito cerrado (Doc Angeloc, s. f.): el corazón, mediante sus cuatro cavidades, válvulas unidireccionales y red coronaria, bombea alrededor de 7,000 litros diarios para irrigar los lechos capilares (Sanders Smith, 2009; Munizaga Wolf, 2008), función vulnerable a la aterosclerosis si la dieta promueve hipercolesterolemia e inflamación endotelial (PlusEsMas, 2014; Las Dietas Saludables, 2015). En paralelo, la mecánica ventilatoria impulsada por el diafragma moviliza aire hacia más de 200 m² de membrana alvéolo-capilar, donde el intercambio de oxígeno (O₂) y dióxido de carbono (CO₂) permite la respiración interna o tisular: el O₂ entregado por la sangre oxida completamente los hidratos de carbono, grasas y aminoácidos prescritos en la dieta, sosteniendo la homeostasis y la vida celular (Hall &amp; Guyton, 2007; Tortora &amp; Derrickson, 2006; Mejor con Salud, s. f.).
+            </p>
+          </div>
+
+          <!-- Interactive Integrative Chain -->
+          <div class="evidence-stage">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:var(--space-sm);flex-wrap:wrap;">
+              <span class="chip" data-status="info">Esquema integrador interactivo</span>
+              <span class="metric-label" style="margin:0;">Selecciona una unidad del circuito</span>
+            </div>
+
+            <div class="evidence-toolbar">
+              <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectChainStep(0, this)">U1 · Espacio</button>
+              <button type="button" class="btn-tab" aria-pressed="false" onclick="selectChainStep(1, this)">U2 · Tejidos</button>
+              <button type="button" class="btn-tab" aria-pressed="false" onclick="selectChainStep(2, this)">U3 · Transporte</button>
+              <button type="button" class="btn-tab" aria-pressed="false" onclick="selectChainStep(3, this)">U4 · Oxidación</button>
+            </div>
+
+            <div class="svg-frame">
+              <svg viewBox="0 0 460 320" role="img" aria-label="Diagrama integrador de las cuatro unidades hacia el metabolismo nutricional">
+                <rect x="0" y="0" width="460" height="320" fill="var(--background)" />
+                <!-- Connectors -->
+                <path d="M 115 76 L 230 76 L 230 120" fill="none" stroke="var(--outline)" stroke-width="2" stroke-dasharray="4 3" />
+                <path d="M 345 76 L 230 76" fill="none" stroke="var(--outline)" stroke-width="2" stroke-dasharray="4 3" />
+                <path d="M 230 176 L 230 220" fill="none" stroke="var(--primary)" stroke-width="2.5" />
+                <path d="M 115 245 L 345 245" fill="none" stroke="var(--tertiary)" stroke-width="2.5" />
+
+                <!-- Node U1 -->
+                <g id="chain-node-0" style="cursor:pointer;" onclick="selectChainStep(0)">
+                  <rect x="20" y="24" width="190" height="68" rx="10" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="2" />
+                  <text x="34" y="48" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-primary-container)">UNIDAD 1 · PLANIMETRÍA</text>
+                  <text x="34" y="66" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" fill="var(--on-surface)">Ubicación tridimensional</text>
+                  <text x="34" y="81" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface-variant)">Cavidades digestiva y torácica</text>
+                </g>
+
+                <!-- Node U2 -->
+                <g id="chain-node-1" style="cursor:pointer;" onclick="selectChainStep(1)">
+                  <rect x="250" y="24" width="190" height="68" rx="10" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />
+                  <text x="264" y="48" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface)">UNIDAD 2 · HISTOLOGÍA</text>
+                  <text x="264" y="66" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" fill="var(--on-surface)">Epitelio, matriz y músculo</text>
+                  <text x="264" y="81" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface-variant)">Absorción, plasma y reserva</text>
+                </g>
+
+                <!-- Center Hub -->
+                <rect x="125" y="120" width="210" height="58" rx="10" fill="var(--surface-container)" stroke="var(--primary)" stroke-width="1.5" />
+                <text x="230" y="145" text-anchor="middle" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--on-primary-container)">NUTRIENTE EN EL MEDIO INTERNO</text>
+                <text x="230" y="164" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface-variant)">Glucosa, aminoácidos, lípidos y micronutrientes</text>
+
+                <!-- Node U3 -->
+                <g id="chain-node-2" style="cursor:pointer;" onclick="selectChainStep(2)">
+                  <rect x="20" y="220" width="190" height="72" rx="10" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />
+                  <text x="34" y="244" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface)">UNIDAD 3 · CARDIOVASCULAR</text>
+                  <text x="34" y="262" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" fill="var(--on-surface)">Bomba y red coronaria</text>
+                  <text x="34" y="277" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface-variant)">7,000 L/día hacia los capilares</text>
+                </g>
+
+                <!-- Node U4 -->
+                <g id="chain-node-3" style="cursor:pointer;" onclick="selectChainStep(3)">
+                  <rect x="250" y="220" width="190" height="72" rx="10" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />
+                  <text x="264" y="244" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface)">UNIDAD 4 · RESPIRATORIO</text>
+                  <text x="264" y="262" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" fill="var(--on-surface)">Hematosis O₂ / CO₂</text>
+                  <text x="264" y="277" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface-variant)">Oxidación completa en tejidos</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="inspector-box" id="chain-inspector">
+              <h3 class="inspector-title" id="chain-title">Unidad 1 · Precisión espacial como cimiento clínico</h3>
+              <p class="inspector-text" id="chain-desc">
+                Los planos sagital, coronal y horizontal, junto con la división en nueve regiones abdominopélvicas, sitúan con exactitud los órganos de digestión y absorción (estómago en epigastrio, hígado en hipocondrio derecho, intestino delgado en mesogastrio) antes de evaluar cualquier ruta metabólica.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UNIDAD 1 -->
+      <section id="unidad-1" class="unit-section reveal">
+        <span class="kicker">Unidad 1 · Fundamentos morfológicos</span>
+        <h2 class="section-title">Anatomía, planimetría y topografía corporal</h2>
+        <p class="section-subtitle">
+          Dos evidencias gráficas representativas sobre el sistema de coordenadas espaciales del organismo y la localización topográfica de los órganos encargados de procesar la dieta.
+        </p>
+
+        <div class="unit-band">
+          <!-- ACTIVIDAD 1.1 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 1.1 · Unidad 1</span>
+                <h3 class="activity-title">Trazado de Planos y Ejes Anatómicos</h3>
+              </div>
+              <span class="chip" data-status="info">Planimetría y biomecánica</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="evidence-toolbar" role="group" aria-label="Seleccionar plano anatómico">
+                  <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectPlane('sagital', this)">Plano Sagital / Medio</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectPlane('coronal', this)">Plano Coronal / Frontal</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectPlane('horizontal', this)">Plano Horizontal / Axial</button>
+                </div>
+
+                <div class="svg-frame">
+                  <svg viewBox="0 0 520 340" role="img" aria-label="Esquema trazado de planos y ejes anatómicos en posición anatómica estándar">
+                    <rect x="0" y="0" width="520" height="340" fill="var(--background)" />
+                    <!-- Grid guide -->
+                    <line x1="260" y1="16" x2="260" y2="324" stroke="var(--outline-variant)" stroke-width="1" stroke-dasharray="3 3" />
+                    <text x="140" y="28" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface-variant)">POSICIÓN ANATÓMICA ANTERIOR</text>
+                    <text x="390" y="28" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface-variant)">RELACIÓN PLANO–EJE–MOVIMIENTO</text>
+
+                    <!-- Silhouette in anatomical position (palms forward) -->
+                    <g fill="var(--surface-container-low)" stroke="var(--on-surface)" stroke-width="1.8">
+                      <!-- Head & neck -->
+                      <circle cx="140" cy="66" r="18" />
+                      <rect x="133" y="84" width="14" height="12" rx="3" />
+                      <!-- Torso -->
+                      <path d="M 108 98 Q 140 92 172 98 L 166 192 Q 140 198 114 192 Z" />
+                      <!-- Arms slightly abducted, palms forward -->
+                      <path d="M 108 100 L 82 152 L 72 198 L 84 202 L 96 156 L 111 118" />
+                      <path d="M 172 100 L 198 152 L 208 198 L 196 202 L 184 156 L 169 118" />
+                      <!-- Legs -->
+                      <path d="M 116 193 L 114 256 L 112 310 L 128 310 L 134 256 L 138 198" />
+                      <path d="M 164 193 L 166 256 L 168 310 L 152 310 L 146 256 L 142 198" />
+                    </g>
+
+                    <!-- Dynamic Plane Overlays -->
+                    <!-- Sagital -->
+                    <g id="plane-svg-sagital" opacity="1">
+                      <line x1="140" y1="38" x2="140" y2="322" stroke="var(--primary)" stroke-width="3" />
+                      <rect x="136" y="42" width="8" height="276" fill="var(--primary)" fill-opacity="0.18" />
+                      <line x1="76" y1="144" x2="204" y2="144" stroke="var(--data-3)" stroke-width="2.5" stroke-dasharray="5 3" />
+                      <circle cx="140" cy="144" r="5" fill="var(--data-3)" />
+                      <text x="102" y="138" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface)">Eje Coronal</text>
+                      <text x="148" y="54" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--primary)">Derecha | Izquierda</text>
+                    </g>
+
+                    <!-- Coronal -->
+                    <g id="plane-svg-coronal" opacity="0">
+                      <rect x="96" y="46" width="88" height="266" rx="6" fill="var(--primary)" fill-opacity="0.16" stroke="var(--primary)" stroke-width="2.5" />
+                      <circle cx="140" cy="150" r="8" fill="var(--data-3)" />
+                      <circle cx="140" cy="150" r="3" fill="var(--background)" />
+                      <text x="140" y="172" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface)">Eje Sagital (perpendicular)</text>
+                      <text x="140" y="58" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--primary)">Ventral / Dorsal</text>
+                    </g>
+
+                    <!-- Horizontal -->
+                    <g id="plane-svg-horizontal" opacity="0">
+                      <ellipse cx="140" cy="154" rx="74" ry="16" fill="var(--primary)" fill-opacity="0.2" stroke="var(--primary)" stroke-width="2.5" />
+                      <line x1="140" y1="42" x2="140" y2="316" stroke="var(--data-3)" stroke-width="2.5" stroke-dasharray="5 3" />
+                      <text x="148" y="88" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface)">Eje Vertical</text>
+                      <text x="140" y="132" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--primary)">Cefálico (Sup.) / Caudal (Inf.)</text>
+                    </g>
+
+                    <!-- Proximal/Distal callout on arm -->
+                    <circle cx="192" cy="138" r="3.5" fill="var(--tertiary)" />
+                    <text x="200" y="138" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--secondary)">Proximal</text>
+                    <circle cx="204" cy="194" r="3.5" fill="var(--tertiary)" />
+                    <text x="210" y="198" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--secondary)">Distal</text>
+
+                    <!-- Right-side Schema Summary -->
+                    <rect x="280" y="48" width="220" height="248" rx="10" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.2" />
+                    <text x="296" y="74" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--on-primary-container)" id="plane-box-title">PLANO SAGITAL O MEDIO</text>
+                    <text x="296" y="96" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface-variant)">MITADES RESULTANTES</text>
+                    <text x="296" y="114" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" fill="var(--on-surface)" id="plane-box-regions">Lado derecho e izquierdo (Medial / Lateral)</text>
+
+                    <line x1="296" y1="128" x2="484" y2="128" stroke="var(--outline-variant)" stroke-width="1" />
+                    <text x="296" y="148" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface-variant)">EJE PERPENDICULAR</text>
+                    <text x="296" y="166" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" fill="var(--on-surface)" id="plane-box-axis">Eje Coronal (atraviesa de costado)</text>
+
+                    <line x1="296" y1="180" x2="484" y2="180" stroke="var(--outline-variant)" stroke-width="1" />
+                    <text x="296" y="200" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface-variant)">MOVIMIENTOS PERMITIDOS</text>
+                    <text x="296" y="218" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="700" fill="var(--primary)" id="plane-box-moves">Flexión (adelante) y Extensión (atrás)</text>
+
+                    <line x1="296" y1="232" x2="484" y2="232" stroke="var(--outline-variant)" stroke-width="1" />
+                    <text x="296" y="252" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface-variant)">APLICACIÓN NUTRICIONAL</text>
+                    <text x="296" y="270" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface)" id="plane-box-app">Simetría corporal y pliegues medial/lateral</text>
+                  </svg>
+                </div>
+
+                <div class="inspector-box">
+                  <h4 class="inspector-title" id="plane-detail-title">Plano Sagital · Eje Coronal</h4>
+                  <p class="inspector-text" id="plane-detail-text">
+                    Divide el cuerpo en mitades derecha e izquierda, permitiendo definir qué estructura es medial (cercana a la línea media) o lateral. Al cruzar perpendicularmente el eje coronal, habilita movimientos de flexión y extensión esenciales en la evaluación funcional del gasto energético muscular (Doc Angeloc, s. f.; Quiroz, 2007).
+                  </p>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 1.1</p>
+                  <p class="analysis-prose">
+                    Elegí el trazado de planos y ejes anatómicos porque constituye el alfabeto geométrico indispensable para describir cualquier órgano o movimiento humano sin ambigüedad clínica. A partir de la posición anatómica estándar —bipedestación erguida, cara y palmas orientadas hacia adelante—, los planos sagital, coronal y horizontal se articulan con sus ejes perpendiculares para explicar la biomecánica de flexión, abducción, rotación, pronación y supinación, así como las referencias proximal y distal en extremidades (Doc Angeloc, s. f.; Moore, 2002). En la práctica nutricional aplicada, esta precisión espacial resulta insustituible para estandarizar mediciones antropométricas (perímetros en plano horizontal, localización de pliegues cutáneos y evaluación de masa magra apendicular), evitando errores de cálculo al estimar reservas energéticas y requerimientos metabólicos.
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Concepto moderno:</strong> relación directa entre estructura corporal y función desempeñada desde Vesalio.</li>
+                  <li><strong>Métodos diagnósticos:</strong> evolución desde la disección clásica hacia rayos X, tomografía, resonancia nuclear, ecografía y endoscopía.</li>
+                  <li><strong>Términos de orientación:</strong> cefálico/caudal, ventral/dorsal, medial/lateral y proximal/distal.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACTIVIDAD 1.2 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 1.2 · Unidad 1</span>
+                <h3 class="activity-title">Regiones y Cavidades Abdominopélvicas</h3>
+              </div>
+              <span class="chip" data-status="ok">Topografía digestiva</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-sm);">
+                  <span class="metric-label" style="margin:0;">Mapa de las 9 regiones abdominopélvicas</span>
+                  <span class="chip" data-status="info">Haz clic en cualquier cuadrante</span>
+                </div>
+
+                <div class="abdomen-wrap">
+                  <div class="svg-frame">
+                    <svg viewBox="0 0 280 310" role="img" aria-label="Esquema anatómico de las cavidades torácica, abdominal y pélvica con las nueve regiones">
+                      <rect x="0" y="0" width="280" height="310" fill="var(--background)" />
+                      <!-- Torso contour -->
+                      <path d="M 65 20 Q 140 10 215 20 L 222 108 L 208 265 Q 140 295 72 265 L 58 108 Z" fill="var(--surface-container-low)" stroke="var(--on-surface)" stroke-width="1.6" />
+                      <!-- Thoracic cavity & Diaphragm -->
+                      <path d="M 74 34 Q 140 24 206 34 L 204 86 Q 140 70 76 86 Z" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="1.2" />
+                      <text x="140" y="54" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-primary-container)">CAVIDAD TORÁCICA</text>
+                      <path d="M 76 86 Q 140 68 204 86" fill="none" stroke="var(--tertiary)" stroke-width="3" />
+                      <text x="140" y="96" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="700" fill="var(--secondary)">DIAFRAGMA</text>
+
+                      <!-- Simplified visceral silhouettes -->
+                      <!-- Liver -->
+                      <path d="M 82 108 L 138 106 Q 130 132 84 134 Z" fill="var(--data-3)" fill-opacity="0.22" stroke="var(--data-3)" stroke-width="1" />
+                      <!-- Stomach -->
+                      <path d="M 140 108 Q 188 108 186 138 Q 162 152 138 136 Z" fill="var(--data-1)" fill-opacity="0.22" stroke="var(--data-1)" stroke-width="1" />
+                      <!-- Small intestine -->
+                      <rect x="102" y="152" width="76" height="58" rx="14" fill="var(--data-2)" fill-opacity="0.16" stroke="var(--data-2)" stroke-width="1" />
+                      <!-- Large intestine frame -->
+                      <path d="M 86 226 L 86 146 L 194 146 L 194 236 L 154 252" fill="none" stroke="var(--on-surface-variant)" stroke-width="3" stroke-dasharray="4 2" />
+
+                      <!-- 3x3 Topographic Grid Overlay -->
+                      <g stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 2">
+                        <line x1="114" y1="102" x2="114" y2="262" />
+                        <line x1="166" y1="102" x2="166" y2="262" />
+                        <line x1="74" y1="152" x2="206" y2="152" />
+                        <line x1="74" y1="208" x2="206" y2="208" />
+                      </g>
+
+                      <!-- Highlight active region -->
+                      <rect id="abdomen-highlight" x="115" y="103" width="50" height="48" rx="4" fill="var(--primary)" fill-opacity="0.28" stroke="var(--primary)" stroke-width="2" />
+                      <text x="140" y="294" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface-variant)">CAVIDAD ABDOMINOPÉLVICA (9 REGIONES)</text>
+                    </svg>
+                  </div>
+
+                  <div>
+                    <div class="region-grid-ui" role="group" aria-label="Cuadrantes abdominopélvicos">
+                      <button type="button" class="region-btn" onclick="selectAbdomen('hd', this)">Hipocondrio Der.</button>
+                      <button type="button" class="region-btn is-active" onclick="selectAbdomen('epi', this)">Epigastrio</button>
+                      <button type="button" class="region-btn" onclick="selectAbdomen('hi', this)">Hipocondrio Izq.</button>
+
+                      <button type="button" class="region-btn" onclick="selectAbdomen('fd', this)">Flanco Der.</button>
+                      <button type="button" class="region-btn" onclick="selectAbdomen('meso', this)">Mesogastrio</button>
+                      <button type="button" class="region-btn" onclick="selectAbdomen('fi', this)">Flanco Izq.</button>
+
+                      <button type="button" class="region-btn" onclick="selectAbdomen('fid', this)">Fosa Ilíaca Der.</button>
+                      <button type="button" class="region-btn" onclick="selectAbdomen('hipo', this)">Hipogastrio</button>
+                      <button type="button" class="region-btn" onclick="selectAbdomen('fii', this)">Fosa Ilíaca Izq.</button>
+                    </div>
+
+                    <div class="inspector-box" style="margin-top:var(--space-md);">
+                      <h4 class="inspector-title" id="abdomen-title">Epigastrio (Región superior central)</h4>
+                      <p class="inspector-text" id="abdomen-desc">
+                        Aloja el estómago, el lóbulo izquierdo del hígado y porción del páncreas. Aquí el alimento se tritura y mezcla con ácido gástrico durante ~30 min mientras la mucosa epitelial protege la pared gástrica contra úlceras antes de pasar hacia el intestino delgado (Zapata Mira, s. f.).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 1.2</p>
+                  <p class="analysis-prose">
+                    Seleccioné la cartografía de cavidades y las nueve regiones abdominopélvicas porque traduce la planimetría teórica en un instrumento clínico inmediato para interpretar la fisiología digestiva. Separada de la cavidad torácica por el diafragma, la cavidad abdominal alberga secuencialmente la cámara gástrica (epigastrio), el hígado secretor de bilis emulsionante de grasas (hipocondrio derecho), el páncreas neutralizante de acidez, los 3.5 metros del intestino delgado cubiertos de vellosidades absortivas (mesogastrio) y la válvula ileocecal que da paso al intestino grueso (fosa ilíaca derecha), donde se extrae agua y actúan bacterias proteolíticas y sacarolíticas (Zapata Mira, s. f.; Drake et al., 2009). Comprender esta distribución espacial capacita al nutriólogo para correlacionar síntomas digestivos localizados con déficits específicos de absorción de lípidos, agua o carbohidratos fermentables.
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Hígado y páncreas:</strong> bilis para emulsionar gotículas lipídicas y jugo pancreático neutralizador del quimo ácido.</li>
+                  <li><strong>Intestino delgado (~3.5 m):</strong> absorción mayoritaria de nutrientes en ~1.5 horas gracias a vellosidades microscópicas.</li>
+                  <li><strong>Intestino grueso:</strong> recuperación hídrica y fermentación bacteriana de carbohidratos complejos no digeribles.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- UNIDAD 2 -->
+      <section id="unidad-2" class="unit-section reveal">
+        <span class="kicker">Unidad 2 · Histología y organización tisular</span>
+        <h2 class="section-title">De la célula al tejido especializado</h2>
+        <p class="section-subtitle">
+          Organigramas tisulares y esquemas estructurales que explican cómo la cohesión epitelial, la matriz conjuntiva, la sangre y la arquitectura músculo-esquelética ejecutan el metabolismo.
+        </p>
+
+        <div class="unit-band">
+          <!-- ACTIVIDAD 2.1 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 2.1 · Unidad 2</span>
+                <h3 class="activity-title">Histología del Tejido Epitelial y Conectivo</h3>
+              </div>
+              <span class="chip" data-status="info">Organigrama tisular</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="evidence-toolbar" role="group" aria-label="Explorar subtipos de tejidos epitelial y conectivo">
+                  <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectTissue('epitelial', this)">Epitelial y Glandular</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectTissue('conjuntivo', this)">Conjuntivo Propiamente Dicho</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectTissue('especializado', this)">Especializado (Cartílago y Sangre)</button>
+                </div>
+
+                <div class="svg-frame">
+                  <svg viewBox="0 0 520 300" role="img" aria-label="Organigrama comparativo del tejido epitelial y los subtipos del tejido conjuntivo">
+                    <rect x="0" y="0" width="520" height="300" fill="var(--background)" />
+                    <!-- Hierarchy tree -->
+                    <rect x="155" y="16" width="210" height="34" rx="8" fill="var(--primary)" />
+                    <text x="260" y="37" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-primary)">TEJIDOS FUNDAMENTALES (WELSCH, 2014)</text>
+
+                    <line x1="260" y1="50" x2="260" y2="68" stroke="var(--outline)" stroke-width="1.5" />
+                    <line x1="92" y1="68" x2="428" y2="68" stroke="var(--outline)" stroke-width="1.5" />
+                    <line x1="92" y1="68" x2="92" y2="84" stroke="var(--outline)" stroke-width="1.5" />
+                    <line x1="260" y1="68" x2="260" y2="84" stroke="var(--outline)" stroke-width="1.5" />
+                    <line x1="428" y1="68" x2="428" y2="84" stroke="var(--outline)" stroke-width="1.5" />
+
+                    <!-- Branch 1: Epitelial -->
+                    <g id="tissue-card-epitelial" style="cursor:pointer;" onclick="selectTissue('epitelial')">
+                      <rect x="16" y="84" width="152" height="196" rx="10" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="2" />
+                      <text x="92" y="106" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-primary-container)">TEJIDO EPITELIAL</text>
+                      <!-- Micro-diagram: tightly packed cells -->
+                      <rect x="34" y="118" width="26" height="34" rx="2" fill="var(--background)" stroke="var(--primary)" stroke-width="1.2" />
+                      <rect x="62" y="118" width="26" height="34" rx="2" fill="var(--background)" stroke="var(--primary)" stroke-width="1.2" />
+                      <rect x="90" y="118" width="26" height="34" rx="2" fill="var(--background)" stroke="var(--primary)" stroke-width="1.2" />
+                      <rect x="118" y="118" width="26" height="34" rx="2" fill="var(--background)" stroke="var(--primary)" stroke-width="1.2" />
+                      <circle cx="47" cy="138" r="4.5" fill="var(--primary)" />
+                      <circle cx="75" cy="138" r="4.5" fill="var(--primary)" />
+                      <circle cx="103" cy="138" r="4.5" fill="var(--primary)" />
+                      <circle cx="131" cy="138" r="4.5" fill="var(--primary)" />
+                      <line x1="32" y1="156" x2="148" y2="156" stroke="var(--secondary)" stroke-width="2.5" />
+                      <text x="92" y="176" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" font-weight="700" fill="var(--on-surface)">Células en lámina unida</text>
+                      <text x="92" y="196" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Superficies y cavidades</text>
+                      <text x="92" y="214" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Barrera mucosa y absorción</text>
+                      <text x="92" y="232" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Glándulas y receptores</text>
+                      <text x="92" y="250" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Especialización de membrana</text>
+                    </g>
+
+                    <!-- Branch 2: Conjuntivo Propio -->
+                    <g id="tissue-card-conjuntivo" style="cursor:pointer;" onclick="selectTissue('conjuntivo')">
+                      <rect x="184" y="84" width="152" height="196" rx="10" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />
+                      <text x="260" y="106" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-surface)">CONJUNTIVO PROPIO</text>
+                      <!-- Micro-diagram: dispersed cells + matrix fibers -->
+                      <rect x="200" y="118" width="120" height="40" rx="6" fill="var(--background)" stroke="var(--outline-variant)" stroke-width="1" />
+                      <line x1="206" y1="126" x2="312" y2="150" stroke="var(--data-3)" stroke-width="2" />
+                      <line x1="208" y1="150" x2="310" y2="124" stroke="var(--data-4)" stroke-width="1.2" stroke-dasharray="3 2" />
+                      <ellipse cx="228" cy="138" rx="9" ry="5" fill="var(--primary)" />
+                      <ellipse cx="288" cy="134" rx="9" ry="5" fill="var(--tertiary)" />
+                      <text x="260" y="176" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" font-weight="700" fill="var(--on-surface)">Matriz extracelular abundante</text>
+                      <text x="260" y="196" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Laxo (bajo pleura/peritoneo)</text>
+                      <text x="260" y="214" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Denso y reticular (sostén)</text>
+                      <text x="260" y="232" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Adiposo (triglicéridos)</text>
+                      <text x="260" y="250" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Fibroblastos y colágeno</text>
+                    </g>
+
+                    <!-- Branch 3: Especializado -->
+                    <g id="tissue-card-especializado" style="cursor:pointer;" onclick="selectTissue('especializado')">
+                      <rect x="352" y="84" width="152" height="196" rx="10" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />
+                      <text x="428" y="106" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-surface)">ESPECIALIZADO</text>
+                      <!-- Micro-diagram: cartilage lacunae & blood elements -->
+                      <rect x="368" y="118" width="120" height="40" rx="6" fill="var(--background)" stroke="var(--outline-variant)" stroke-width="1" />
+                      <circle cx="390" cy="138" r="9" fill="var(--surface-container)" stroke="var(--primary)" stroke-width="1.2" />
+                      <circle cx="390" cy="138" r="4" fill="var(--primary)" />
+                      <circle cx="426" cy="138" r="8" fill="var(--error)" fill-opacity="0.75" />
+                      <polygon points="456,132 465,138 458,146 449,140" fill="var(--data-3)" />
+                      <text x="428" y="176" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" font-weight="700" fill="var(--on-surface)">Cartílago, hueso y sangre</text>
+                      <text x="428" y="196" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Cartílago hialino/elástico/fibroso</text>
+                      <text x="428" y="214" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Condrocitos (nutrición por difusión)</text>
+                      <text x="428" y="232" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Plasma (albúmina, globulinas)</text>
+                      <text x="428" y="250" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Plaquetas (coagulación, 6–7 días)</text>
+                    </g>
+                  </svg>
+                </div>
+
+                <div class="inspector-box">
+                  <h4 class="inspector-title" id="tissue-title">Tejido Epitelial y Glandular: Cohesión y Barrera</h4>
+                  <p class="inspector-text" id="tissue-desc">
+                    Conformado por células en estrecha unión dispuestas como láminas sobre superficies internas y externas. Además de recubrir cavidades y formar glándulas secretoras, actúa como barrera protectora (como el epitelio gástrico frente al ácido) y superficie selectiva de absorción y recepción sensorial (Welsch, 2014; Fortoul, 2013).
+                  </p>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 2.1</p>
+                  <p class="analysis-prose">
+                    Escogí el organigrama comparado entre tejido epitelial y conjuntivo porque revela dos estrategias biológicas complementarias: mientras el epitelio reúne células en estrecha cohesión para formar barreras, glándulas y superficies de absorción, el conjuntivo separa sus células dentro de una matriz extracelular sintetizada por fibroblastos, rica en fibras de colágeno, elásticas, glucosaminoglucanos y proteoglucanos (Fortoul, 2013; Welsch, 2014; RC Med, s. f.). Esta distinción resulta vital en nutrición aplicada: la integridad del cartílago avascular depende de la difusión a través de su matriz, el tejido adiposo regula el depósito de triglicéridos y la sangre —subtipo conjuntivo líquido— transporta grasas, azúcares, minerales y proteínas plasmáticas como la albúmina y las globulinas inmunitarias junto con plaquetas que previenen hemorragias (Valdez Saenz, 2015).
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Células fijas del conjuntivo:</strong> fibroblastos (elaboran matriz) y miofibroblastos (cicatrización contráctil).</li>
+                  <li><strong>Proteínas del plasma:</strong> albúmina (equilibrio hídrico), globulinas (defensa) y factores de coagulación.</li>
+                  <li><strong>Reserva energética:</strong> tejido adiposo especializado en el almacenamiento seguro de triglicéridos.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACTIVIDAD 2.2 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 2.2 · Unidad 2</span>
+                <h3 class="activity-title">Tejido Muscular y Óseo</h3>
+              </div>
+              <span class="chip" data-status="ok">Sostén y trabajo mecánico</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="evidence-toolbar" role="group" aria-label="Seleccionar arquitectura muscular u ósea">
+                  <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectMuscle('esqueletico', this)">Músculo Esquelético y Fascias</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectMuscle('cardiaco', this)">Cardíaco y Liso</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectMuscle('oseo', this)">Tejido Óseo de Sostén</button>
+                </div>
+
+                <div class="svg-frame">
+                  <svg viewBox="0 0 520 290" role="img" aria-label="Esquema jerárquico del músculo esquelético con epimisio, perimisio y endomisio junto a fibras cardíaca, lisa y tejido óseo">
+                    <rect x="0" y="0" width="520" height="290" fill="var(--background)" />
+
+                    <!-- Left: Skeletal muscle cross-section concentric rings -->
+                    <g id="muscle-group-esqueletico">
+                      <text x="145" y="28" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-primary-container)">ORGANIZACIÓN DEL MÚSCULO ESQUELÉTICO</text>
+                      <!-- Epimisio -->
+                      <circle cx="145" cy="145" r="96" fill="var(--surface-container-low)" stroke="var(--primary)" stroke-width="4" />
+                      <!-- Perimisio fascicles -->
+                      <circle cx="110" cy="115" r="34" fill="var(--background)" stroke="var(--tertiary)" stroke-width="2.5" />
+                      <circle cx="182" cy="122" r="32" fill="var(--background)" stroke="var(--tertiary)" stroke-width="2.5" />
+                      <circle cx="144" cy="186" r="36" fill="var(--background)" stroke="var(--tertiary)" stroke-width="2.5" />
+                      <!-- Endomisio fibers -->
+                      <circle cx="102" cy="110" r="10" fill="var(--data-4)" fill-opacity="0.25" stroke="var(--data-4)" stroke-width="1.5" />
+                      <circle cx="122" cy="122" r="10" fill="var(--data-4)" fill-opacity="0.25" stroke="var(--data-4)" stroke-width="1.5" />
+                      <circle cx="176" cy="116" r="9" fill="var(--data-4)" fill-opacity="0.25" stroke="var(--data-4)" stroke-width="1.5" />
+                      <circle cx="192" cy="130" r="9" fill="var(--data-4)" fill-opacity="0.25" stroke="var(--data-4)" stroke-width="1.5" />
+                      <circle cx="136" cy="182" r="10" fill="var(--data-4)" fill-opacity="0.25" stroke="var(--data-4)" stroke-width="1.5" />
+                      <circle cx="158" cy="192" r="10" fill="var(--data-4)" fill-opacity="0.25" stroke="var(--data-4)" stroke-width="1.5" />
+                      <!-- Callout lines -->
+                      <line x1="226" y1="90" x2="265" y2="74" stroke="var(--primary)" stroke-width="1.5" />
+                      <text x="270" y="76" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--primary)">1. Epimisio (denso externo)</text>
+                      <line x1="208" y1="138" x2="265" y2="128" stroke="var(--tertiary)" stroke-width="1.5" />
+                      <text x="270" y="132" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--secondary)">2. Perimisio (forma fascículos)</text>
+                      <line x1="168" y1="192" x2="265" y2="184" stroke="var(--data-4)" stroke-width="1.5" />
+                      <text x="270" y="188" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--data-4)">3. Endomisio (cada fibra)</text>
+
+                      <rect x="270" y="210" width="230" height="58" rx="8" fill="var(--primary-container)" />
+                      <text x="282" y="232" font-family="Figtree, sans-serif" font-size="10.5" font-weight="700" fill="var(--on-primary-container)">Proteínas contráctiles: Actina y Miosina</text>
+                      <text x="282" y="250" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--on-surface)">Inervación e irrigación ingresan por epimisio</text>
+                    </g>
+
+                    <!-- Cardiac & Smooth view (hidden by default) -->
+                    <g id="muscle-group-cardiaco" opacity="0">
+                      <text x="260" y="28" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-primary-container)">CONTRACCIÓN INVOLUNTARIA: ESTÁNDAR CARDÍACO Y LISO</text>
+                      <!-- Cardiac branched fibers with intercalated discs -->
+                      <rect x="26" y="48" width="224" height="214" rx="10" fill="var(--surface-container-low)" stroke="var(--primary)" stroke-width="1.8" />
+                      <text x="138" y="72" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--primary)">ESTRIADO CARDÍACO</text>
+                      <path d="M 46 112 L 120 112 L 146 96 L 228 96" fill="none" stroke="var(--primary)" stroke-width="14" stroke-linecap="round" />
+                      <path d="M 120 112 L 148 134 L 228 134" fill="none" stroke="var(--primary)" stroke-width="14" stroke-linecap="round" />
+                      <line x1="110" y1="103" x2="110" y2="121" stroke="var(--background)" stroke-width="3" />
+                      <line x1="184" y1="87" x2="184" y2="105" stroke="var(--background)" stroke-width="3" />
+                      <text x="138" y="176" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface)">Presenta uniones entre fibras</text>
+                      <text x="138" y="196" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Movimiento involuntario continuo</text>
+                      <text x="138" y="214" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Núcleos orientados en paralelo</text>
+                      <text x="138" y="232" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Bomba sincrónica miocárdica</text>
+
+                      <!-- Smooth muscle -->
+                      <rect x="270" y="48" width="224" height="214" rx="10" fill="var(--surface-container-low)" stroke="var(--tertiary)" stroke-width="1.8" />
+                      <text x="382" y="72" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--secondary)">MÚSCULO LISO ARTERIAL</text>
+                      <ellipse cx="332" cy="108" rx="38" ry="10" fill="var(--tertiary)" fill-opacity="0.35" stroke="var(--tertiary)" stroke-width="1.5" />
+                      <ellipse cx="424" cy="112" rx="38" ry="10" fill="var(--tertiary)" fill-opacity="0.35" stroke="var(--tertiary)" stroke-width="1.5" />
+                      <ellipse cx="378" cy="134" rx="40" ry="10" fill="var(--tertiary)" fill-opacity="0.35" stroke="var(--tertiary)" stroke-width="1.5" />
+                      <ellipse cx="332" cy="108" rx="8" ry="3.5" fill="var(--secondary)" />
+                      <ellipse cx="424" cy="112" rx="8" ry="3.5" fill="var(--secondary)" />
+                      <ellipse cx="378" cy="134" rx="8" ry="3.5" fill="var(--secondary)" />
+                      <text x="382" y="176" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface)">Sin uniones estriadas</text>
+                      <text x="382" y="196" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Paredes de arterias y vísceras</text>
+                      <text x="382" y="214" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Regula vasodilatación arterial</text>
+                      <text x="382" y="232" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">• Respuesta automática biológica</text>
+                    </g>
+
+                    <!-- Bone view (hidden by default) -->
+                    <g id="muscle-group-oseo" opacity="0">
+                      <text x="260" y="28" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-primary-container)">TEJIDO ÓSEO Y SOPORTE ESQUELÉTICO</text>
+                      <!-- Osteon concentric lamellae -->
+                      <circle cx="145" cy="150" r="82" fill="var(--surface-container-low)" stroke="var(--on-surface)" stroke-width="2" />
+                      <circle cx="145" cy="150" r="62" fill="none" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="6 3" />
+                      <circle cx="145" cy="150" r="42" fill="none" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="6 3" />
+                      <circle cx="145" cy="150" r="16" fill="var(--error)" fill-opacity="0.22" stroke="var(--error)" stroke-width="2" />
+                      <text x="145" y="154" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="700" fill="var(--error)">Vaso</text>
+
+                      <rect x="258" y="64" width="236" height="174" rx="10" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" />
+                      <text x="274" y="92" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--on-surface)">Características funcionales (Welsch, 2014)</text>
+                      <text x="274" y="118" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface)">• Tejido firme y duro encaminado al sostén</text>
+                      <text x="274" y="140" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface)">• Protege órganos vitales (caja torácica)</text>
+                      <text x="274" y="162" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface)">• Inserción de músculos voluntarios</text>
+                      <text x="274" y="184" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface)">• Médula ósea: origen de plaquetas y</text>
+                      <text x="282" y="200" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="var(--on-surface)">células sanguíneas (Valdez Saenz, 2015)</text>
+                      <text x="274" y="222" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" font-weight="700" fill="var(--secondary)">• Reserva mineral dinámica (Ca y P)</text>
+                    </g>
+                  </svg>
+                </div>
+
+                <div class="inspector-box">
+                  <h4 class="inspector-title" id="muscle-title">Músculo Esquelético: Envolturas Conjuntivas y Movimiento Voluntario</h4>
+                  <p class="inspector-text" id="muscle-desc">
+                    Adosado al aparato esquelético, organiza sus fibras ricas en actina y miosina mediante tres capas de tejido conjuntivo: epimisio (capa densa externa donde ingresan nervios y vasos), perimisio (agrupa fascículos) y endomisio (rodea cada fibra muscular individual) (Fortoul, 2013; RC Med, s. f.).
+                  </p>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 2.2</p>
+                  <p class="analysis-prose">
+                    Elegí integrar la arquitectura muscular y ósea porque ambos tejidos conforman la unidad metabólica más exigente en proteínas, minerales y oxígeno del organismo. Al contrastar el músculo esquelético voluntario —estructurado por epimisio, perimisio y endomisio— con el músculo estriado cardíaco y el músculo liso involuntario de las arterias (Fortoul, 2013; RC Med, s. f.), se comprende que las proteínas contráctiles actina y miosina dependen de un suministro constante de aminoácidos, calcio y ATP para sostener tanto el movimiento voluntario como el tono vascular y el latido cardíaco. Por su parte, el tejido óseo provee sostén mecánico, aloja la médula hematopoyética donde nacen plaquetas y leucocitos, y actúa como reservorio mineral indispensable en la planeación nutricional clínica (Welsch, 2014; Valdez Saenz, 2015).
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Niveles de organización muscular:</strong> epimisio → perimisio → endomisio → fibra con actina y miosina.</li>
+                  <li><strong>Control biológico:</strong> liso y cardíaco operan involuntariamente; el esquelético responde al control voluntario.</li>
+                  <li><strong>Sinergia óseo-muscular:</strong> la nutrición proteica y mineral sostiene masa magra y densidad ósea.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- UNIDAD 3 -->
+      <section id="unidad-3" class="unit-section reveal">
+        <span class="kicker">Unidad 3 · Sistema cardiovascular</span>
+        <h2 class="section-title">Hemodinámica cardíaca y cardioprotección nutricional</h2>
+        <p class="section-subtitle">
+          Flujo circulatorio a través de las cuatro cavidades y válvulas cardíacas, acoplado a la prevención dietética de la aterosclerosis coronaria.
+        </p>
+
+        <div class="unit-band">
+          <!-- ACTIVIDAD 3.1 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 3.1 · Unidad 3</span>
+                <h3 class="activity-title">Anatomía y Válvulas Cardíacas</h3>
+              </div>
+              <span class="chip" data-status="info">Circulación mayor y menor</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="evidence-toolbar" role="group" aria-label="Fases del ciclo cardíaco y válvulas">
+                  <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectHeartPhase(0, this)">1. Bomba Derecha (Menor)</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectHeartPhase(1, this)">2. Válvulas AV (1.er Ruido)</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectHeartPhase(2, this)">3. Bomba Izquierda (Mayor)</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectHeartPhase(3, this)">4. Semilunares (2.º Ruido)</button>
+                </div>
+
+                <div class="svg-frame">
+                  <svg viewBox="0 0 520 330" role="img" aria-label="Diagrama de flujo circulatorio de las cuatro cavidades y cuatro válvulas del corazón humano">
+                    <rect x="0" y="0" width="520" height="330" fill="var(--background)" />
+
+                    <!-- Labels -->
+                    <text x="150" y="24" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--primary)">MITAD DERECHA (SANGRE POBRE EN O₂)</text>
+                    <text x="370" y="24" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--error)">MITAD IZQUIERDA (SANGRE RICA EN O₂)</text>
+
+                    <!-- Pulmonary & Systemic Loops -->
+                    <rect x="196" y="34" width="128" height="34" rx="17" fill="var(--surface-container-low)" stroke="var(--tertiary)" stroke-width="1.6" />
+                    <text x="260" y="55" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10.5" font-weight="700" fill="var(--secondary)">PULMONES (Hematosis)</text>
+
+                    <!-- Right Atrium (AD) -->
+                    <rect id="heart-ad" x="72" y="88" width="144" height="72" rx="12" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="2" />
+                    <text x="144" y="114" text-anchor="middle" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--on-primary-container)">Aurícula Derecha (~50 mL)</text>
+                    <text x="144" y="132" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">• Nodo sinusal (marcapasos)</text>
+                    <text x="144" y="147" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">• Recibe venas cavas</text>
+
+                    <!-- Left Atrium (AI) -->
+                    <rect id="heart-ai" x="304" y="88" width="144" height="72" rx="12" fill="color-mix(in srgb, var(--error) 10%, var(--background))" stroke="var(--error)" stroke-width="1.8" />
+                    <text x="376" y="114" text-anchor="middle" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--error)">Aurícula Izquierda (~50 mL)</text>
+                    <text x="376" y="132" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">• 4 venas pulmonares</text>
+                    <text x="376" y="147" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">• Únicas venas con O₂</text>
+
+                    <!-- Tricuspid Valve Badge -->
+                    <rect id="valve-tri" x="90" y="166" width="108" height="26" rx="13" fill="var(--background)" stroke="var(--primary)" stroke-width="2" />
+                    <text x="144" y="183" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--primary)">V. Tricúspide (3 velos)</text>
+
+                    <!-- Mitral Valve Badge -->
+                    <rect id="valve-mit" x="322" y="166" width="108" height="26" rx="13" fill="var(--background)" stroke="var(--error)" stroke-width="2" />
+                    <text x="376" y="183" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--error)">V. Mitral (2 velos)</text>
+
+                    <!-- Right Ventricle (VD) -->
+                    <path id="heart-vd" d="M 76 198 L 212 198 L 194 274 Q 144 290 92 272 Z" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="2" />
+                    <text x="144" y="226" text-anchor="middle" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--on-primary-container)">Ventrículo Der. (~60 mL)</text>
+                    <text x="144" y="244" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">Pared delgada (impulsa</text>
+                    <text x="144" y="258" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">hacia pulmones)</text>
+
+                    <!-- Left Ventricle (VI) - 3x thicker wall -->
+                    <path id="heart-vi" d="M 308 198 L 444 198 L 424 274 Q 376 294 326 274 Z" fill="color-mix(in srgb, var(--error) 10%, var(--background))" stroke="var(--error)" stroke-width="4.5" />
+                    <text x="376" y="226" text-anchor="middle" font-family="Figtree, sans-serif" font-size="12" font-weight="800" fill="var(--error)">Ventrículo Izq. (~60 mL)</text>
+                    <text x="376" y="244" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">Pared 3× más gruesa</text>
+                    <text x="376" y="258" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface)">(potencia sistémica)</text>
+
+                    <!-- Semilunar exits -->
+                    <path d="M 212 222 L 240 222 L 240 68" fill="none" stroke="var(--primary)" stroke-width="2.5" />
+                    <rect id="valve-pulm" x="198" y="132" width="84" height="22" rx="11" fill="var(--background)" stroke="var(--primary)" stroke-width="1.5" />
+                    <text x="240" y="147" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9.5" font-weight="700" fill="var(--primary)">V. Pulmonar</text>
+
+                    <path d="M 280 68 L 280 106 L 304 106" fill="none" stroke="var(--error)" stroke-width="2.5" />
+                    <path d="M 308 242 L 260 242 L 260 306" fill="none" stroke="var(--error)" stroke-width="3" />
+                    <rect id="valve-aor" x="218" y="264" width="84" height="22" rx="11" fill="var(--background)" stroke="var(--error)" stroke-width="1.5" />
+                    <text x="260" y="279" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9.5" font-weight="700" fill="var(--error)">V. Aórtica</text>
+
+                    <text x="260" y="322" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10.5" font-weight="700" fill="var(--error)">ARTERIA AORTA → CIRCULACIÓN MAYOR (CUERPO COMPLETO)</text>
+                  </svg>
+                </div>
+
+                <div class="inspector-box">
+                  <h4 class="inspector-title" id="heart-phase-title">1. Bomba Derecha y Circulación Menor</h4>
+                  <p class="inspector-text" id="heart-phase-desc">
+                    El nodo sinusal (marcapasos en la parte superior de la aurícula derecha) estabiliza ~70 latidos por minuto. La aurícula derecha (~50 mL) envía la sangre pobre en oxígeno por la válvula tricúspide hacia el ventrículo derecho (~60 mL), que la impulsa hacia los pulmones mediante la arteria pulmonar —única arteria del cuerpo con sangre venosa— (Sanders Smith, 2009; Munizaga Wolf, 2008).
+                  </p>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 3.1</p>
+                  <p class="analysis-prose">
+                    Incluí el diagrama de flujo valvular porque demuestra cómo la geometría de las cuatro cavidades y sus cuatro válvulas transforma la contracción rítmica (sístole) y relajación (diástole) en un transporte unidireccional sin reflujo. Las válvulas auriculoventriculares —tricúspide de tres velos y mitral de dos— están ancladas por cuerdas tendinosas como paracaídas, mientras las semilunares pulmonar y aórtica adoptan forma de tres nidos de golondrina que se abren por simple gradiente de presión (Munizaga Wolf, 2008; Moore, 2002). El mayor grosor del ventrículo izquierdo —tres veces superior al derecho— otorga la potencia para enviar sangre oxigenada y nutrientes por la aorta a todo el organismo, asegurando el riego capilar de cada tejido (Sanders Smith, 2009).
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Focos de auscultación:</strong> primer ruido por cierre simultáneo mitral-tricúspide; segundo ruido por cierre semilunar.</li>
+                  <li><strong>Inversión vascular pulmonar:</strong> la arteria pulmonar lleva CO₂; las cuatro venas pulmonares regresan O₂.</li>
+                  <li><strong>Electrocardiograma y control autonómico:</strong> el ritmo automático se acelera al ejercitarse y desciende al dormir.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACTIVIDAD 3.2 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 3.2 · Unidad 3</span>
+                <h3 class="activity-title">Taller de Prevención de Aterosclerosis Coronaria</h3>
+              </div>
+              <span class="chip" data-status="alert">Riesgo coronario y nutrición</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="control-group">
+                  <label class="control-label" for="plaque-slider">
+                    <span>Simulador de estenosis en arteria coronaria izquierda</span>
+                    <span id="plaque-pct-badge" class="chip" data-status="ok">15% obstrucción · Flujo conservado</span>
+                  </label>
+                  <input type="range" id="plaque-slider" min="0" max="98" value="15" oninput="updateCoronaryPlaque(this.value)">
+                </div>
+
+                <div class="svg-frame">
+                  <svg viewBox="0 0 520 220" role="img" aria-label="Corte transversal y longitudinal de arteria coronaria con acumulación progresiva de placa aterosclerótica">
+                    <rect x="0" y="0" width="520" height="220" fill="var(--background)" />
+                    <text x="145" y="22" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface-variant)">CORTE LONGITUDINAL DE CORONARIA</text>
+                    <text x="395" y="22" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="700" fill="var(--on-surface-variant)">LUZ ARTERIAL TRANSVERSAL</text>
+
+                    <!-- Arterial outer wall -->
+                    <rect x="20" y="42" width="250" height="116" rx="12" fill="color-mix(in srgb, var(--error) 12%, var(--background))" stroke="var(--on-surface)" stroke-width="2" />
+                    <!-- Top & bottom plaque deposits (dynamic height) -->
+                    <path id="plaque-top" d="M 60 44 Q 145 64 230 44 Z" fill="var(--data-3)" fill-opacity="0.82" />
+                    <path id="plaque-bot" d="M 60 156 Q 145 136 230 156 Z" fill="var(--data-3)" fill-opacity="0.82" />
+
+                    <!-- Red blood cells flowing -->
+                    <g id="blood-flow-cells" fill="var(--error)">
+                      <ellipse cx="52" cy="100" rx="8" ry="5" />
+                      <ellipse cx="95" cy="96" rx="8" ry="5" />
+                      <ellipse cx="145" cy="100" rx="8" ry="5" />
+                      <ellipse cx="195" cy="102" rx="8" ry="5" />
+                      <ellipse cx="238" cy="100" rx="8" ry="5" />
+                    </g>
+
+                    <!-- Thrombus crack warning (visible >75%) -->
+                    <g id="thrombus-marker" opacity="0">
+                      <polygon points="140,86 154,96 144,112 132,102" fill="var(--error)" stroke="var(--on-surface)" stroke-width="1" />
+                      <text x="145" y="180" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10.5" font-weight="800" fill="var(--error)">FISURA Y TROMBO: RIESGO DE INFARTO (MI)</text>
+                    </g>
+                    <text id="plaque-caption-left" x="145" y="200" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--on-surface-variant)">Paredes lisas; LDL, macrófagos, calcio y fibrina mínimos</text>
+
+                    <!-- Cross section circle -->
+                    <circle cx="395" cy="104" r="56" fill="var(--data-3)" fill-opacity="0.82" stroke="var(--on-surface)" stroke-width="2.5" />
+                    <circle id="lumen-circle" cx="395" cy="104" r="46" fill="color-mix(in srgb, var(--error) 16%, var(--background))" stroke="var(--error)" stroke-width="1.5" />
+                    <text id="lumen-text" x="395" y="108" text-anchor="middle" font-family="Figtree, sans-serif" font-size="13" font-weight="800" fill="var(--on-surface)">85% luz</text>
+                    <text x="395" y="180" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--on-surface-variant)">Umbral crítico &gt;90%: oclusión coronaria</text>
+                  </svg>
+                </div>
+
+                <!-- 7 Foods Cardioprotective Table -->
+                <div class="data-table-wrap">
+                  <table class="clinical-table">
+                    <thead>
+                      <tr>
+                        <th>Alimento cardioprotector</th>
+                        <th>Porción recomendada</th>
+                        <th>Aporte calórico</th>
+                        <th>Compuestos bioactivos y mecanismo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Nueces</strong> (o frutos secos sin sal)</td>
+                        <td>4–6 u/día (25 g)</td>
+                        <td class="num-cell">160 kcal</td>
+                        <td>Ácido linolénico (omega-3) y fitosteroles; reducen el colesterol circulante.</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Vino tinto</strong> (ingesta moderada)</td>
+                        <td>1 copa en cena (150 mL)</td>
+                        <td class="num-cell">87.5 kcal</td>
+                        <td>Polifenoles antioxidantes y antiinflamatorios; bajan la presión arterial (−30% riesgo CV en PREDIMED, n = 7,447).</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Pescado azul</strong></td>
+                        <td>3 veces/sem (140 g/día)</td>
+                        <td class="num-cell">168–280 kcal</td>
+                        <td>~10 g de grasa rica en EPA y DHA (omega-3); baja triglicéridos, vasodilata y reduce riesgo de trombosis.</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Aceite de oliva</strong></td>
+                        <td>2 cucharadas/día</td>
+                        <td class="num-cell">239 kcal</td>
+                        <td>Ácidos grasos monoinsaturados, antioxidantes, vitamina E y fitosteroles cardioprotectores.</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Cereales integrales</strong></td>
+                        <td>1 puñado (40 g)</td>
+                        <td class="num-cell">149 kcal</td>
+                        <td>Fibra (salvado de avena, germen de trigo, arroz y pan integral) que reduce significativamente el colesterol.</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Frutos rojos</strong></td>
+                        <td>3+ veces/sem (100 g)</td>
+                        <td class="num-cell">30–39 kcal</td>
+                        <td>Antocianinas (cerezas, moras, frambuesas, uvas negras); protegen arterias, controlan glucosa/lípidos (−32% infarto en mujeres).</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Hábitos integrales</strong></td>
+                        <td>Ejercicio y control periódico</td>
+                        <td class="num-cell">Preventivo</td>
+                        <td>Monitoreo de glucosa, tensión arterial y colesterol para frenar obesidad e hipertensión.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 3.2</p>
+                  <p class="analysis-prose">
+                    Elegí este taller porque conecta directamente la fisiopatología coronaria con la intervención dietética basada en evidencia. Cuando el colesterol LDL se oxida y los macrófagos lo acumulan junto con detritos celulares, calcio y fibrina, se forma placa aterosclerótica que endurece las arterias coronarias; al superar el 90% de obstrucción o fisurarse formando un trombo, sobreviene isquemia, angina o muerte celular por infarto de miocardio (PlusEsMas, 2014; Williams, 2002). Frente a ello, la prescripción de fibra integral, fitosteroles, grasas monoinsaturadas, omega-3 EPA/DHA, polifenoles y antocianinas —respaldada por cohortes como el estudio PREDIMED— protege el endotelio, mejora la vasodilatación y preserva la perfusión del propio músculo cardíaco (Las Dietas Saludables, 2015).
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Nutrición del miocardio:</strong> la sangre intracavitaria pasa demasiado rápido; solo las coronarias irrigan al corazón.</li>
+                  <li><strong>Diferencia clínica:</strong> la isquemia produce angina reversible; la oclusión trombótica causa necrosis miocárdica.</li>
+                  <li><strong>Sinergia dietética:</strong> la dieta mediterránea suplementada con frutos secos y aceite de oliva redujo 30% los eventos CV.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- UNIDAD 4 -->
+      <section id="unidad-4" class="unit-section reveal">
+        <span class="kicker">Unidad 4 · Sistema respiratorio</span>
+        <h2 class="section-title">Barrera alvéolo-capilar, mecánica y oxidación</h2>
+        <p class="section-subtitle">
+          Bitácora microanatómica de la hematosis pulmonar y Diagrama V de Gowin sobre cómo la ventilación mecánica sostiene la oxidación metabólica de la dieta.
+        </p>
+
+        <div class="unit-band">
+          <!-- ACTIVIDAD 4.1 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 4.1 · Unidad 4</span>
+                <h3 class="activity-title">Bitácora de la Barrera Alvéolo-Capilar</h3>
+              </div>
+              <span class="chip" data-status="info">Hematosis y surfactante</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="evidence-toolbar" role="group" aria-label="Capas de la bitácora alveolar">
+                  <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectAlveoliLayer('vias', this)">Vías Aéreas y Pulmones</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectAlveoliLayer('hematosis', this)">Intercambio O₂ / CO₂</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectAlveoliLayer('neumocitos', this)">Neumocitos I, II y Surfactante</button>
+                </div>
+
+                <div class="svg-frame">
+                  <svg viewBox="0 0 520 310" role="img" aria-label="Esquema detallado de la vía aérea, saco alveolar, neumocitos tipo I y II, factor surfactante y capilar sanguíneo">
+                    <rect x="0" y="0" width="520" height="310" fill="var(--background)" />
+
+                    <!-- Left panel: Macroscopic airways -->
+                    <rect x="14" y="16" width="166" height="278" rx="10" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.2" />
+                    <text x="97" y="38" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10.5" font-weight="800" fill="var(--on-primary-container)">VÍA AÉREA CONDUCTORA</text>
+                    <!-- Trachea & Bronchi -->
+                    <rect x="89" y="54" width="16" height="62" rx="4" fill="var(--background)" stroke="var(--primary)" stroke-width="2" />
+                    <line x1="97" y1="116" x2="62" y2="152" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" />
+                    <line x1="97" y1="116" x2="132" y2="152" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" />
+                    <!-- Lungs with fissures -->
+                    <path d="M 80 120 Q 32 130 30 220 Q 56 234 86 218 Z" fill="var(--primary)" fill-opacity="0.14" stroke="var(--primary)" stroke-width="1.6" />
+                    <path d="M 114 120 Q 162 130 164 220 Q 138 234 108 218 Z" fill="var(--primary)" fill-opacity="0.14" stroke="var(--primary)" stroke-width="1.6" />
+                    <!-- Horizontal & oblique fissures -->
+                    <line x1="34" y1="168" x2="82" y2="168" stroke="var(--on-surface-variant)" stroke-width="1.2" stroke-dasharray="3 2" />
+                    <line x1="32" y1="196" x2="84" y2="174" stroke="var(--on-surface-variant)" stroke-width="1.2" stroke-dasharray="3 2" />
+                    <line x1="112" y1="172" x2="162" y2="196" stroke="var(--on-surface-variant)" stroke-width="1.2" stroke-dasharray="3 2" />
+                    <!-- Pleura & Diaphragm -->
+                    <path d="M 28 236 Q 97 220 166 236" fill="none" stroke="var(--tertiary)" stroke-width="3" />
+                    <text x="97" y="254" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9.5" font-weight="700" fill="var(--secondary)">Diafragma + Pleura</text>
+                    <text x="97" y="272" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="9.5" fill="var(--on-surface-variant)">Fosas → Faringe → Laringe → Tráquea</text>
+                    <text x="97" y="285" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="9.5" fill="var(--on-surface-variant)">Bronquios → Bronquiolos → Alvéolos</text>
+
+                    <!-- Right panel: Microscopic Alveolo-Capillary Barrier -->
+                    <rect x="194" y="16" width="312" height="278" rx="10" fill="var(--background)" stroke="var(--outline-variant)" stroke-width="1.2" />
+                    <text x="350" y="38" text-anchor="middle" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--on-surface)">BARRERA ALVÉOLO-CAPILAR (200–300 µm)</text>
+
+                    <!-- Alveolus sac -->
+                    <circle cx="315" cy="140" r="78" fill="var(--primary-container)" fill-opacity="0.45" stroke="var(--primary)" stroke-width="3" />
+                    <!-- Surfactant inner film -->
+                    <circle id="alveoli-surfactant" cx="315" cy="140" r="71" fill="none" stroke="var(--tertiary)" stroke-width="2.5" stroke-dasharray="5 3" />
+
+                    <!-- Pneumocyte Type I & II -->
+                    <ellipse cx="268" cy="84" rx="18" ry="7" transform="rotate(-38 268 84)" fill="var(--background)" stroke="var(--primary)" stroke-width="1.8" />
+                    <text x="234" y="66" font-family="Figtree, sans-serif" font-size="9.5" font-weight="700" fill="var(--primary)">Neumocito I</text>
+                    <circle cx="272" cy="196" r="13" fill="var(--tertiary)" fill-opacity="0.3" stroke="var(--tertiary)" stroke-width="1.8" />
+                    <text x="220" y="232" font-family="Figtree, sans-serif" font-size="9.5" font-weight="700" fill="var(--secondary)">Neumocito II</text>
+                    <text x="220" y="244" font-family="Atkinson Hyperlegible, sans-serif" font-size="9" fill="var(--on-surface-variant)">(Factor surfactante)</text>
+
+                    <!-- Capillary wrapping right side -->
+                    <path d="M 412 58 Q 436 140 412 224" fill="none" stroke="var(--primary)" stroke-width="24" stroke-linecap="round" opacity="0.22" />
+                    <path d="M 412 58 Q 436 140 412 224" fill="none" stroke="var(--error)" stroke-width="16" stroke-linecap="round" opacity="0.25" />
+                    <!-- Red blood cells in capillary -->
+                    <circle cx="416" cy="84" r="6" fill="var(--primary)" />
+                    <circle cx="424" cy="138" r="6" fill="var(--warning)" />
+                    <circle cx="416" cy="196" r="6" fill="var(--error)" />
+
+                    <!-- Gas Exchange Arrows -->
+                    <g id="alveoli-gas-arrows">
+                      <path d="M 358 122 L 406 122" fill="none" stroke="var(--error)" stroke-width="2.5" />
+                      <polygon points="406,122 398,117 398,127" fill="var(--error)" />
+                      <text x="352" y="114" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--error)">O₂ → Vena pulmonar</text>
+
+                      <path d="M 406 158 L 358 158" fill="none" stroke="var(--primary)" stroke-width="2.5" />
+                      <polygon points="358,158 366,153 366,163" fill="var(--primary)" />
+                      <text x="348" y="176" font-family="Figtree, sans-serif" font-size="11" font-weight="800" fill="var(--primary)">CO₂ ← Arteria pulmonar</text>
+                    </g>
+
+                    <!-- Metrics footer inside SVG -->
+                    <rect x="210" y="256" width="280" height="28" rx="6" fill="var(--surface-container-low)" />
+                    <text x="350" y="274" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="700" fill="var(--on-surface)">200 M al nacer → 400 M en adulto · &gt;200 m² de intercambio</text>
+                  </svg>
+                </div>
+
+                <div class="inspector-box">
+                  <h4 class="inspector-title" id="alveoli-title">Acondicionamiento del aire y anatomía pulmonar</h4>
+                  <p class="inspector-text" id="alveoli-desc">
+                    El aire ingresa por las fosas nasales donde se calienta, humedece y filtra, desciende por faringe, laringe, tráquea y bronquios hasta los bronquiolos terminales. Los pulmones —protegidos por las costillas, envueltos por pleura y divididos por cisuras horizontal y oblicua— alojan 400 millones de alvéolos adultos con colágeno y fibras elásticas (Mejor con Salud, s. f.).
+                  </p>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 4.1</p>
+                  <p class="analysis-prose">
+                    Seleccioné la bitácora de la barrera alvéolo-capilar porque muestra el punto microscópico exacto donde el aire atmosférico se convierte en oxígeno metabólicamente disponible. En el adulto, cerca de 400 millones de alvéolos de 200 a 300 micras generan más de 200 metros cuadrados de superficie rodeada por capilares derivados de la arteria y vena pulmonares; allí los neumocitos tipo I ejecutan la difusión pasiva de O₂ y CO₂, mientras los neumocitos tipo II sintetizan factor surfactante de fosfolípidos y lipoproteínas que evita el colapso alveolar (Mejor con Salud, s. f.; Netter, 2011). Esta interfase condiciona el metabolismo nutricional: la síntesis de fosfolípidos surfactantes requiere sustratos lipídicos y proteínas adecuadas, y cualquier falla en la membrana respiratoria restringe la oxidación energética periférica.
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Tabique interalveolar:</strong> punto de encuentro capilar entre la arteria pulmonar (trae CO₂) y la vena pulmonar (sale con O₂).</li>
+                  <li><strong>Factor surfactante:</strong> agente tensioactivo de fosfolípidos y lipoproteínas producido por neumocitos tipo II.</li>
+                  <li><strong>Elasticidad tisular:</strong> colágeno y fibras elásticas permiten el retroceso pasivo durante la espiración.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACTIVIDAD 4.2 -->
+          <article class="activity-card">
+            <div class="activity-header">
+              <div>
+                <span class="kicker" style="margin-bottom:var(--space-xs);">Actividad 4.2 · Unidad 4</span>
+                <h3 class="activity-title">Diagrama V de Gowin de Mecánica y Metabolismo</h3>
+              </div>
+              <span class="chip" data-status="ok">Epistemología y bioenergética</span>
+            </div>
+
+            <div class="activity-body">
+              <div class="evidence-stage">
+                <div class="evidence-toolbar" role="group" aria-label="Simular escenario fisiológico en el Diagrama V de Gowin">
+                  <button type="button" class="btn-tab is-active" aria-pressed="true" onclick="selectGowinState('reposo', this)">Escenario: Reposo basal</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectGowinState('ejercicio', this)">Escenario: Ejercicio aeróbico</button>
+                  <button type="button" class="btn-tab" aria-pressed="false" onclick="selectGowinState('hipoxia', this)">Escenario: Baja eficiencia alveolar</button>
+                </div>
+
+                <div class="gowin-grid">
+                  <div class="gowin-center">
+                    <span class="metric-label" style="margin-bottom:2px;">Pregunta central de investigación (Vértice V)</span>
+                    <p style="margin:0;font-weight:700;color:var(--on-primary-container);font-size:0.98rem;">
+                      ¿De qué manera la mecánica respiratoria y el gradiente de gases garantizan la oxidación completa de los nutrientes alimentarios en las células del organismo?
+                    </p>
+                  </div>
+
+                  <div class="gowin-wing">
+                    <h4>Dominio Conceptual (Pensar)</h4>
+                    <p style="margin:0;font-size:0.9rem;">
+                      <strong>Teorías y Principios:</strong> Ley de homeostasis energética; mecánica de volumen torácico mediada por el diafragma (capacidad pulmonar de 4,000 a 6,000 cm³).
+                    </p>
+                    <p style="margin:0;font-size:0.9rem;">
+                      <strong>Conceptos clave:</strong> Ventilación cíclica (inspiración activa y espiración elástica), respiración externa (pulmonar) y respiración interna o tisular con gasto mínimo de energía (Hall &amp; Guyton, 2007).
+                    </p>
+                    <p style="margin:0;font-size:0.9rem;color:var(--on-primary-container);font-weight:700;" id="gowin-concept-dyn">
+                      Estado basal: equilibrio entre ventilación alveolar y oxidación mitocondrial de glucosa y ácidos grasos.
+                    </p>
+                  </div>
+
+                  <div class="gowin-wing">
+                    <h4>Dominio Metodológico (Hacer)</h4>
+                    <p style="margin:0;font-size:0.9rem;">
+                      <strong>Afirmaciones de conocimiento:</strong> La eficiencia respiratoria depende del seguimiento continuo de las concentraciones de O₂ y CO₂ a través de la membrana alveolar y capilar tisular.
+                    </p>
+                    <p style="margin:0;font-size:0.9rem;">
+                      <strong>Registros y Transformaciones:</strong> Control de frecuencia respiratoria, volumen corriente, cociente respiratorio y balance energético dietético (Benito, 2014; Drucker, 2005).
+                    </p>
+                    <p style="margin:0;font-size:0.9rem;color:var(--secondary);font-weight:700;" id="gowin-method-dyn">
+                      Indicador: ~12–16 respiraciones/min; cesión tisular basal de O₂ y excreción estable de CO₂.
+                    </p>
+                  </div>
+
+                  <div class="gowin-event">
+                    <span class="metric-label" style="margin-bottom:2px;">Acontecimiento / Objeto de estudio</span>
+                    <p style="margin:0;font-size:0.92rem;color:var(--on-surface);" id="gowin-event-dyn">
+                      Acoplamiento entre la expansión diafragmática, el transporte eritrocitario de O₂ y la oxidación completa de carbohidratos, lípidos y proteínas provenientes de la dieta (Mejor con Salud, s. f.; Gil, 2010).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="analysis-panel">
+                <div class="analysis-box">
+                  <p class="analysis-label">Análisis crítico · Actividad 4.2</p>
+                  <p class="analysis-prose">
+                    Elegí el Diagrama V de Gowin porque ordena epistemológicamente la relación bidireccional entre los conceptos bioenergéticos y las mediciones fisiológicas del sistema respiratorio. Frente a la visión aislada del pulmón, el ala conceptual integra la contracción diafragmática (4,000 a 6,000 cm³ de capacidad), la ventilación cíclica y la respiración interna o tisular, mientras el ala metodológica registra cómo la frecuencia y el volumen respiratorio sostienen las concentraciones de O₂ y CO₂ necesarias para la homeostasis (Hall &amp; Guyton, 2007; Drucker, 2005). En nutrición aplicada y deportiva, esta síntesis explica por qué la energía contenida en los alimentos solo se vuelve utilizable cuando la mecánica ventilatoria logra la oxidación completa de los sustratos con mínimo gasto energético (Benito, 2014; Gil, 2010).
+                  </p>
+                </div>
+                <ul class="concept-list">
+                  <li><strong>Respiración mecánica:</strong> inspiración (aire entra por nariz, faringe, tráquea y bronquios) y espiración elástica.</li>
+                  <li><strong>Respiración interna (tisular):</strong> la sangre capilar cede O₂ a las células y recoge CO₂ residual.</li>
+                  <li><strong>Finalidad metabólica:</strong> sin oxígeno alveolar no ocurre la oxidación completa de los macronutrientes prescritos.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- REFERENCIAS BIBLIOGRÁFICAS APA 7 -->
+      <section id="referencias" class="unit-section reveal">
+        <span class="kicker">Sustento documental</span>
+        <h2 class="section-title">Referencias bibliográficas (APA 7.ª edición)</h2>
+        <p class="section-subtitle">
+          Fuentes académicas, libros de texto y materiales audiovisuales citados a lo largo del portafolio, ordenados alfabéticamente.
+        </p>
+
+        <div class="status-card" data-status="info">
+          <ul class="apa-list">
+            <li>Alva, J. G. (2012, 19 de agosto). <em>El corazón</em>. Esquemas Educativos.</li>
+            <li>Benito, P. C. S. (2014). <em>Alimentación y nutrición en la vida activa: ejercicio y deporte</em>. Universidad Nacional de Educación a Distancia.</li>
+            <li>Cirlos Gutiérrez, G. (2004). <em>Principios de anatomía e higiene</em>. Limusa.</li>
+            <li>Doc Angeloc. (s. f.). <em>Historia de anatomía - Movimiento, planos y ejes anatómicos</em> [Archivo de video]. YouTube.</li>
+            <li>Drake, R., Vogl, W., &amp; Mitchell, A. (2009). <em>Anatomía de Gray</em>. Elsevier.</li>
+            <li>Drucker, R. (2005). <em>Fisiología médica</em>. Manual Moderno.</li>
+            <li>Fortoul, T. (2013). <em>Histología y biología celular</em> (2.ª ed.). McGraw-Hill.</li>
+            <li>Gil, A. (2010). <em>Tratado de nutrición: Bases fisiológicas y bioquímicas de la nutrición</em> (2.ª ed.). Editorial Médica Panamericana.</li>
+            <li>Hall, J. E., &amp; Guyton, A. C. (2007). <em>Compendio de fisiología médica</em> (12.ª ed.). Elsevier.</li>
+            <li>Laguna, R., &amp; Claudio, V. (2007). <em>Diccionario de nutrición y dietoterapia</em> (5.ª ed.). McGraw-Hill.</li>
+            <li>Las Dietas Saludables. (2015, 14 de marzo). <em>Alimentos buenos para salud cardiovascular - 7 alimentos recomendados para la salud cardiovascular</em> [Archivo de video]. YouTube.</li>
+            <li>Mejor con Salud. (s. f.). <em>El funcionamiento del sistema respiratorio</em> [Archivo de video]. YouTube.</li>
+            <li>Moore, K. L. (2002). <em>Fundamentos de la anatomía con orientación clínica</em>. Editorial Médica Panamericana.</li>
+            <li>Munizaga Wolf. (2008, 4 de junio). <em>Ciclo cardiaco</em> [Archivo de video]. YouTube.</li>
+            <li>Netter, F. H. (2011). <em>Atlas de anatomía humana</em> (5.ª ed.). Elsevier.</li>
+            <li>PlusEsMas. (2014, 29 de abril). <em>Así se produce un infarto al miocardio</em> [Archivo de video]. YouTube.</li>
+            <li>Quiroz, F. (2007). <em>Anatomía humana</em> (Vol. 1). Porrúa.</li>
+            <li>RC Med. (s. f.). <em>Introducción a tejidos</em> [Archivo de video]. YouTube.</li>
+            <li>RC Med. (s. f.). <em>Tejido conjuntivo</em> [Archivo de video]. YouTube.</li>
+            <li>Sanders Smith. (2009, 1 de diciembre). <em>El corazón humano</em> [Archivo de video]. YouTube.</li>
+            <li>Tortora, G. J., &amp; Derrickson, B. H. (2006). <em>Anatomía y fisiología humana</em> (11.ª ed.). Editorial Médica Panamericana.</li>
+            <li>Universidad Abierta y a Distancia de México. (2026). <em>Anatomía y Fisiología I: Unidad 2. Histología; Unidad 3. Sistema cardiovascular; Unidad 4. Aparato respiratorio</em>. División de Ciencias de la Salud, Biológicas y Ambientales.</li>
+            <li>Valdez Saenz, D. (2015, 2 de enero). <em>Los componentes de la sangre</em> [Archivo de video]. YouTube.</li>
+            <li>Welsch, U. (2014). <em>Sobotta Histología</em> (3.ª ed.). Editorial Médica Panamericana.</li>
+            <li>Williams, M. H. (2002). <em>Nutrición para la salud, la condición física y el deporte</em>. Paidotribo.</li>
+            <li>Zapata Mira, D. A. (s. f.). <em>El proceso de digestión (Tomado de Viaje al interior del cuerpo humano)</em> [Archivo de video]. YouTube.</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    // 1. Navigation active link highlight
+    function setActiveNav(linkEl) {
+      const links = document.querySelectorAll('.nav-link');
+      links.forEach(function (el) { el.classList.remove('active'); });
+      if (linkEl) linkEl.classList.add('active');
+    }
+
+    // 2. Integrative Chain Stepper (Reflexión)
+    const chainData = [
+      {
+        title: `Unidad 1 · Precisión espacial como cimiento clínico`,
+        desc: `Los planos sagital, coronal y horizontal, junto con la división en nueve regiones abdominopélvicas, sitúan con exactitud los órganos de digestión y absorción (estómago en epigastrio, hígado en hipocondrio derecho, intestino delgado en mesogastrio) antes de evaluar cualquier ruta metabólica.`
+      },
+      {
+        title: `Unidad 2 · Arquitectura tisular y transformación de sustratos`,
+        desc: `Las vellosidades epiteliales del intestino delgado absorben nutrientes; el tejido conjuntivo laxo y su matriz de proteoglucanos sostienen el paso hacia los vasos; el tejido adiposo almacena triglicéridos y la sangre distribuye plasma, albúmina, azúcares y grasas hacia el tejido muscular y óseo.`
+      },
+      {
+        title: `Unidad 3 · Impulso hemodinámico y protección coronaria`,
+        desc: `Las cuatro cavidades y válvulas cardíacas bombean ~7,000 L de sangre al día. Preservar arterias coronarias libres de placas de LDL oxidado mediante fibra, omega-3, fitosteroles y polifenoles garantiza la irrigación continua del músculo cardíaco y de todos los tejidos periféricos.`
+      },
+      {
+        title: `Unidad 4 · Hematosis alveolar y oxidación celular`,
+        desc: `El diafragma ventila 400 millones de alvéolos (>200 m²) donde el factor surfactante evita el colapso y los neumocitos tipo I intercambian O₂ por CO₂. En la respiración interna, ese O₂ oxida completamente los nutrientes de la dieta para generar ATP celular.`
+      }
+    ];
+
+    function selectChainStep(idx, btnEl) {
+      const buttons = document.querySelectorAll('#reflexion .btn-tab');
+      if (btnEl) {
+        buttons.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btnEl.classList.add('is-active');
+        btnEl.setAttribute('aria-pressed', 'true');
+      } else if (buttons[idx]) {
+        buttons.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        buttons[idx].classList.add('is-active');
+        buttons[idx].setAttribute('aria-pressed', 'true');
+      }
+
+      for (let i = 0; i < 4; i++) {
+        const node = document.getElementById(`chain-node-${i}`);
+        if (!node) continue;
+        const rect = node.querySelector('rect');
+        if (!rect) continue;
+        if (i === idx) {
+          rect.setAttribute('fill', 'var(--primary-container)');
+          rect.setAttribute('stroke', 'var(--primary)');
+          rect.setAttribute('stroke-width', '2');
+        } else {
+          rect.setAttribute('fill', 'var(--surface-container-low)');
+          rect.setAttribute('stroke', 'var(--outline)');
+          rect.setAttribute('stroke-width', '1.5');
+        }
+      }
+
+      const item = chainData[idx];
+      const titleEl = document.getElementById('chain-title');
+      const descEl = document.getElementById('chain-desc');
+      if (item && titleEl) titleEl.textContent = item.title;
+      if (item && descEl) descEl.textContent = item.desc;
+    }
+
+    // 3. Activity 1.1: Anatomical Planes & Axes
+    const planeData = {
+      sagital: {
+        boxTitle: `PLANO SAGITAL O MEDIO`,
+        regions: `Lado derecho e izquierdo (Medial / Lateral)`,
+        axis: `Eje Coronal (atraviesa de costado)`,
+        moves: `Flexión (adelante) y Extensión (atrás)`,
+        app: `Simetría corporal y pliegues medial/lateral`,
+        detailTitle: `Plano Sagital · Eje Coronal`,
+        detailText: `Divide el cuerpo en mitades derecha e izquierda, permitiendo definir qué estructura es medial (cercana a la línea media) o lateral. Al cruzar perpendicularmente el eje coronal, habilita movimientos de flexión y extensión esenciales en la evaluación funcional del gasto energético muscular (Doc Angeloc, s. f.; Quiroz, 2007).`
+      },
+      coronal: {
+        boxTitle: `PLANO CORONAL O FRONTAL`,
+        regions: `Región anterior (ventral) y posterior (dorsal)`,
+        axis: `Eje Sagital (atraviesa por delante)`,
+        moves: `Abducción (alejar) y Aducción (acercar)`,
+        app: `Envergadura y valoración postural torácica`,
+        detailTitle: `Plano Coronal · Eje Sagital`,
+        detailText: `Separa el organismo en una cara anterior o ventral y otra posterior o dorsal. Al ser atravesado por el eje sagital, permite los movimientos de abducción (alejamiento de la línea media) y aducción (aproximación), claves al examinar expansión torácica y extremidades (Doc Angeloc, s. f.; Moore, 2002).`
+      },
+      horizontal: {
+        boxTitle: `PLANO HORIZONTAL O AXIAL`,
+        regions: `Región superior (cefálica) e inferior (caudal)`,
+        axis: `Eje Vertical (atraviesa por el centro)`,
+        moves: `Rotación, Pronación y Supinación`,
+        app: `Perímetros de cintura, cadera y brazo`,
+        detailTitle: `Plano Horizontal · Eje Vertical`,
+        detailText: `Corta transversalmente en regiones superior (cefálica) e inferior (caudal). Su eje vertical perpendicular autoriza la rotación, además de la pronación (palma hacia abajo) y supinación (palma hacia arriba); en clínica nutricional define el plano exacto de perímetros abdominales y cortes tomográficos (Doc Angeloc, s. f.).`
+      }
+    };
+
+    function selectPlane(key, btnEl) {
+      const parent = btnEl ? btnEl.parentElement : null;
+      if (parent) {
+        parent.querySelectorAll('.btn-tab').forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+      }
+      if (btnEl) {
+        btnEl.classList.add('is-active');
+        btnEl.setAttribute('aria-pressed', 'true');
+      }
+
+      ['sagital', 'coronal', 'horizontal'].forEach(function (p) {
+        const g = document.getElementById(`plane-svg-${p}`);
+        if (g) g.setAttribute('opacity', p === key ? '1' : '0');
+      });
+
+      const d = planeData[key];
+      if (!d) return;
+      const mapIds = {
+        'plane-box-title': d.boxTitle,
+        'plane-box-regions': d.regions,
+        'plane-box-axis': d.axis,
+        'plane-box-moves': d.moves,
+        'plane-box-app': d.app,
+        'plane-detail-title': d.detailTitle,
+        'plane-detail-text': d.detailText
+      };
+      Object.keys(mapIds).forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = mapIds[id];
+      });
+    }
+
+    // 4. Activity 1.2: 9 Abdominopelvic Regions
+    const abdomenData = {
+      hd: { x: 74, y: 103, w: 40, h: 48, title: `Hipocondrio Derecho`, desc: `Contiene la mayor parte del hígado y la vesícula biliar. La bilis hepática emulsiona las grasas dietéticas en minúsculas gotículas para facilitar la acción de lipasas y su absorción intestinal (Zapata Mira, s. f.).` },
+      epi: { x: 115, y: 103, w: 50, h: 48, title: `Epigastrio (Región superior central)`, desc: `Aloja el estómago, el lóbulo izquierdo del hígado y porción del páncreas. Aquí el alimento se tritura y mezcla con ácido gástrico durante ~30 min mientras la mucosa epitelial protege la pared gástrica contra úlceras antes de pasar hacia el intestino delgado (Zapata Mira, s. f.).` },
+      hi: { x: 166, y: 103, w: 40, h: 48, title: `Hipocondrio Izquierdo`, desc: `Aloja el fondo del estómago, el bazo y la cola del páncreas. El páncreas segrega jugo pancreático hacia el duodeno para neutralizar la acidez del quimo gástrico y continuar la digestión enzimática (Zapata Mira, s. f.).` },
+      fd: { x: 74, y: 153, w: 40, h: 54, title: `Flanco Derecho (Vacío derecho)`, desc: `Corresponde al colon ascendente y parte del riñón derecho. Contribuye al ascenso del residuo alimentario para extraer agua y electrolitos tras la fase absortiva del intestino delgado (Zapata Mira, s. f.; Drake et al., 2009).` },
+      meso: { x: 115, y: 153, w: 50, h: 54, title: `Mesogastrio (Región umbilical)`, desc: `Ocupado por el intestino delgado, un tubo serpenteante de ~3.5 metros cubierto de vellosidades microscópicas que multiplican la superficie operativa para metabolizar y absorber la mayoría de los nutrientes en ~1.5 horas (Zapata Mira, s. f.).` },
+      fi: { x: 166, y: 153, w: 40, h: 54, title: `Flanco Izquierdo (Vacío izquierdo)`, desc: `Aloja el colon descendente y parte del yeyuno. En este tramo colónico continúa la consolidación del bolo fecal y la acción de bacterias proteolíticas y sacarolíticas beneficiosas (Zapata Mira, s. f.).` },
+      fid: { x: 74, y: 209, w: 40, h: 52, title: `Fosa Ilíaca Derecha`, desc: `Sitio del ciego, apéndice y la válvula o esfínter ileocecal del íleon, estructura valvular que impide que el contenido del intestino grueso retroceda hacia el intestino delgado (Zapata Mira, s. f.).` },
+      hipo: { x: 115, y: 209, w: 50, h: 52, title: `Hipogastrio (Región suprapúbica)`, desc: `Contiene asas del íleon distal, vejiga urinaria y parte del colon sigmoide; marca la transición hacia la cavidad pélvica y la excreción final de desechos hidroelectrolíticos y alimentarios (Moore, 2002).` },
+      fii: { x: 166, y: 209, w: 40, h: 52, title: `Fosa Ilíaca Izquierda`, desc: `Aloja el colon sigmoide, donde las bacterias sacarolíticas producen enzimas capaces de descomponer hidratos de carbono complejos que de otro modo no podrían digerirse (Zapata Mira, s. f.).` }
+    };
+
+    function selectAbdomen(key, btnEl) {
+      const parent = btnEl ? btnEl.parentElement : null;
+      if (parent) {
+        parent.querySelectorAll('.region-btn').forEach(function (b) {
+          b.classList.remove('is-active');
+        });
+      }
+      if (btnEl) btnEl.classList.add('is-active');
+
+      const d = abdomenData[key];
+      if (!d) return;
+      const hi = document.getElementById('abdomen-highlight');
+      if (hi) {
+        hi.setAttribute('x', d.x);
+        hi.setAttribute('y', d.y);
+        hi.setAttribute('width', d.w);
+        hi.setAttribute('height', d.h);
+      }
+      const titleEl = document.getElementById('abdomen-title');
+      const descEl = document.getElementById('abdomen-desc');
+      if (titleEl) titleEl.textContent = d.title;
+      if (descEl) descEl.textContent = d.desc;
+    }
+
+    // 5. Activity 2.1: Tissue Selector
+    const tissueData = {
+      epitelial: {
+        title: `Tejido Epitelial y Glandular: Cohesión y Barrera`,
+        desc: `Conformado por células en estrecha unión dispuestas como láminas sobre superficies internas y externas. Además de recubrir cavidades y formar glándulas secretoras, actúa como barrera protectora (como el epitelio gástrico frente al ácido) y superficie selectiva de absorción y recepción sensorial (Welsch, 2014; Fortoul, 2013).`
+      },
+      conjuntivo: {
+        title: `Tejido Conjuntivo Propiamente Dicho: Matriz y Reserva`,
+        desc: `Sus células (fibroblastos y miofibroblastos) están separadas por abundante matriz extracelular compuesta de sustancia base hidratada (glucosaminoglucanos sulfatados/no sulfatados, proteoglucanos y glucoproteínas) y fibras de colágeno y elásticas. Incluye tejido laxo (bajo peritoneo y pleura), denso, reticular y adiposo reservorio de triglicéridos (RC Med, s. f.; Fortoul, 2013).`
+      },
+      especializado: {
+        title: `Tejido Conjuntivo Especializado: Cartílago, Hueso y Sangre`,
+        desc: `Comprende el cartílago (hialino, elástico y fibroso), tejido avascular cuyos condrocitos se nutren por difusión a través de la matriz; el tejido óseo firme de sostén; y la sangre, cuyo plasma transporta albúmina, globulinas, factores de coagulación, grasas y azúcares junto con plaquetas que viven 6 a 7 días (Fortoul, 2013; Valdez Saenz, 2015).`
+      }
+    };
+
+    function selectTissue(key, btnEl) {
+      const buttons = document.querySelectorAll('#unidad-2 article:first-of-type .btn-tab');
+      const keys = ['epitelial', 'conjuntivo', 'especializado'];
+      const idx = keys.indexOf(key);
+      buttons.forEach(function (b, i) {
+        const active = btnEl ? (b === btnEl) : (i === idx);
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      keys.forEach(function (k) {
+        const g = document.getElementById(`tissue-card-${k}`);
+        if (!g) return;
+        const rect = g.querySelector('rect');
+        if (!rect) return;
+        if (k === key) {
+          rect.setAttribute('fill', 'var(--primary-container)');
+          rect.setAttribute('stroke', 'var(--primary)');
+          rect.setAttribute('stroke-width', '2');
+        } else {
+          rect.setAttribute('fill', 'var(--surface-container-low)');
+          rect.setAttribute('stroke', 'var(--outline)');
+          rect.setAttribute('stroke-width', '1.5');
+        }
+      });
+
+      const d = tissueData[key];
+      const titleEl = document.getElementById('tissue-title');
+      const descEl = document.getElementById('tissue-desc');
+      if (d && titleEl) titleEl.textContent = d.title;
+      if (d && descEl) descEl.textContent = d.desc;
+    }
+
+    // 6. Activity 2.2: Muscle & Bone
+    const muscleData = {
+      esqueletico: {
+        title: `Músculo Esquelético: Envolturas Conjuntivas y Movimiento Voluntario`,
+        desc: `Adosado al aparato esquelético, organiza sus fibras ricas en actina y miosina mediante tres capas de tejido conjuntivo: epimisio (capa densa externa donde ingresan nervios y vasos), perimisio (agrupa fascículos) y endomisio (rodea cada fibra muscular individual) (Fortoul, 2013; RC Med, s. f.).`
+      },
+      cardiaco: {
+        title: `Músculo Estriado Cardíaco y Músculo Liso Arterial`,
+        desc: `Ambos son involuntarios y responden a las necesidades biológicas automáticas. El miocardio presenta uniones intercelulares para contraerse sincrónicamente, mientras que el músculo liso de las arterias carece de uniones estriadas y regula el diámetro vascular y la tensión arterial (RC Med, s. f.).`
+      },
+      oseo: {
+        title: `Tejido Óseo: Sostén Estructural, Protección y Hematopoyesis`,
+        desc: `Tejido firme y duro encaminado a funciones de sostén y absorción mecánica junto al cartílago. Además de formar las palancas donde tracciona el músculo esquelético y alojar las vísceras torácicas, su médula ósea origina las plaquetas y células sanguíneas circulantes (Welsch, 2014; Valdez Saenz, 2015).`
+      }
+    };
+
+    function selectMuscle(key, btnEl) {
+      const parent = btnEl ? btnEl.parentElement : null;
+      if (parent) {
+        parent.querySelectorAll('.btn-tab').forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+      }
+      if (btnEl) {
+        btnEl.classList.add('is-active');
+        btnEl.setAttribute('aria-pressed', 'true');
+      }
+
+      ['esqueletico', 'cardiaco', 'oseo'].forEach(function (k) {
+        const g = document.getElementById(`muscle-group-${k}`);
+        if (g) g.setAttribute('opacity', k === key ? '1' : '0');
+      });
+
+      const d = muscleData[key];
+      const titleEl = document.getElementById('muscle-title');
+      const descEl = document.getElementById('muscle-desc');
+      if (d && titleEl) titleEl.textContent = d.title;
+      if (d && descEl) descEl.textContent = d.desc;
+    }
+
+    // 7. Activity 3.1: Heart Cycle Stepper
+    const heartPhases = [
+      {
+        title: `1. Bomba Derecha y Circulación Menor`,
+        desc: `El nodo sinusal (marcapasos en la parte superior de la aurícula derecha) estabiliza ~70 latidos por minuto. La aurícula derecha (~50 mL) envía la sangre pobre en oxígeno por la válvula tricúspide hacia el ventrículo derecho (~60 mL), que la impulsa hacia los pulmones mediante la arteria pulmonar —única arteria del cuerpo con sangre venosa— (Sanders Smith, 2009; Munizaga Wolf, 2008).`,
+        highlight: ['heart-ad', 'heart-vd']
+      },
+      {
+        title: `2. Válvulas Auriculoventriculares y Primer Ruido`,
+        desc: `Las válvulas tricúspide (3 velos) y mitral (2 velos) están sujetas por cuerdas tendinosas con forma de paracaídas para impedir el retroceso hacia las aurículas durante la sístole ventricular. Su cierre simultáneo produce el primer ruido cardíaco audible en los focos de auscultación mediante el fonendoscopio (Munizaga Wolf, 2008).`,
+        highlight: ['valve-tri', 'valve-mit']
+      },
+      {
+        title: `3. Bomba Izquierda y Circulación Mayor`,
+        desc: `Tras oxigenarse en los pulmones, la sangre regresa a la aurícula izquierda a través de las cuatro venas pulmonares (únicas venas ricas en O₂). Desciende por la válvula mitral hacia el ventrículo izquierdo, cuya pared muscular es tres veces más gruesa que la derecha para impulsar la sangre desde la cabeza hasta los pies por la aorta (Sanders Smith, 2009).`,
+        highlight: ['heart-ai', 'heart-vi']
+      },
+      {
+        title: `4. Válvulas Semilunares y Segundo Ruido`,
+        desc: `A la salida de ambos ventrículos se ubican las válvulas semilunares pulmonar y aórtica, llamadas también en nido de golondrina por sus tres valvas que se abren por la propia presión sanguínea sin ayuda de cuerdas tendinosas ni músculos papilares. Su cierre genera el segundo ruido cardíaco (Munizaga Wolf, 2008; UnADM, 2026).`,
+        highlight: ['valve-pulm', 'valve-aor']
+      }
+    ];
+
+    function selectHeartPhase(idx, btnEl) {
+      const parent = btnEl ? btnEl.parentElement : null;
+      if (parent) {
+        parent.querySelectorAll('.btn-tab').forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+      }
+      if (btnEl) {
+        btnEl.classList.add('is-active');
+        btnEl.setAttribute('aria-pressed', 'true');
+      }
+
+      const allIds = ['heart-ad', 'heart-vd', 'heart-ai', 'heart-vi', 'valve-tri', 'valve-mit', 'valve-pulm', 'valve-aor'];
+      const phase = heartPhases[idx];
+      if (!phase) return;
+
+      allIds.forEach(function (id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const isHi = phase.highlight.indexOf(id) !== -1;
+        el.setAttribute('opacity', isHi ? '1' : '0.5');
+      });
+
+      const titleEl = document.getElementById('heart-phase-title');
+      const descEl = document.getElementById('heart-phase-desc');
+      if (titleEl) titleEl.textContent = phase.title;
+      if (descEl) descEl.textContent = phase.desc;
+    }
+
+    // 8. Activity 3.2: Coronary Plaque Simulator
+    function updateCoronaryPlaque(val) {
+      const pct = Math.max(0, Math.min(98, Number(val)));
+      const badge = document.getElementById('plaque-pct-badge');
+      const topPath = document.getElementById('plaque-top');
+      const botPath = document.getElementById('plaque-bot');
+      const lumenCircle = document.getElementById('lumen-circle');
+      const lumenText = document.getElementById('lumen-text');
+      const thrombus = document.getElementById('thrombus-marker');
+      const caption = document.getElementById('plaque-caption-left');
+
+      // Peak deflection of plaque toward center (y=100)
+      const topPeak = 44 + (pct / 100) * 53;
+      const botPeak = 156 - (pct / 100) * 53;
+      if (topPath) topPath.setAttribute('d', `M 54 44 Q 145 ${topPeak.toFixed(1)} 236 44 Z`);
+      if (botPath) botPath.setAttribute('d', `M 54 156 Q 145 ${botPeak.toFixed(1)} 236 156 Z`);
+
+      const remaining = Math.max(2, 100 - pct);
+      const radius = Math.max(4, (54 * Math.sqrt(remaining / 100))).toFixed(1);
+      if (lumenCircle) lumenCircle.setAttribute('r', radius);
+      if (lumenText) lumenText.textContent = `${remaining}% luz`;
+
+      if (badge) {
+        if (pct < 40) {
+          badge.setAttribute('data-status', 'ok');
+          badge.textContent = `${pct}% obstrucción · Flujo conservado`;
+        } else if (pct < 90) {
+          badge.setAttribute('data-status', 'warn');
+          badge.textContent = `${pct}% obstrucción · Isquemia / Angina`;
+        } else {
+          badge.setAttribute('data-status', 'alert');
+          badge.textContent = `${pct}% obstrucción · Infarto inminente (MI)`;
+        }
+      }
+
+      if (thrombus) thrombus.setAttribute('opacity', pct >= 75 ? '1' : '0');
+      if (caption) {
+        if (pct < 40) {
+          caption.textContent = `Paredes lisas y flexibles; libre circulación hacia el miocardio.`;
+        } else if (pct < 90) {
+          caption.textContent = `Placa grasa, LDL oxidado y calcio estrechan la arteria; posible angina.`;
+        } else {
+          caption.textContent = `Obstrucción >90%: riesgo crítico de trombosis e infarto de miocardio.`;
+        }
+      }
+    }
+
+    // 9. Activity 4.1: Alveoli Layer Toggle
+    const alveoliData = {
+      vias: {
+        title: `Acondicionamiento del aire y anatomía pulmonar`,
+        desc: `El aire ingresa por las fosas nasales donde se calienta, humedece y filtra, desciende por faringe, laringe, tráquea y bronquios hasta los bronquiolos terminales. Los pulmones —protegidos por las costillas, envueltos por pleura y divididos por cisuras horizontal y oblicua— alojan 400 millones de alvéolos adultos con colágeno y fibras elásticas (Mejor con Salud, s. f.).`
+      },
+      hematosis: {
+        title: `Intercambio gaseoso en el tabique interalveolar`,
+        desc: `El CO₂ transportado por los capilares derivados de la arteria pulmonar atraviesa la pared capilar y alveolar para depositarse en el saco y expulsarse durante la espiración; simultáneamente, el O₂ inspirado difunde en sentido contrario hacia las venas pulmonares que retornan sangre oxigenada al corazón izquierdo (UnADM, 2026).`
+      },
+      neumocitos: {
+        title: `Neumocitos tipo I, tipo II y factor surfactante`,
+        desc: `El epitelio interno del alvéolo integra dos linajes celulares: los neumocitos tipo I, delgados y responsables directos de la difusión gaseosa, y los neumocitos tipo II, productores del líquido alveolar con factor surfactante (fosfolípidos y lipoproteínas) que reduce la tensión superficial e impide el colapso pulmonar (UnADM, 2026).`
+      }
+    };
+
+    function selectAlveoliLayer(key, btnEl) {
+      const parent = btnEl ? btnEl.parentElement : null;
+      if (parent) {
+        parent.querySelectorAll('.btn-tab').forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+      }
+      if (btnEl) {
+        btnEl.classList.add('is-active');
+        btnEl.setAttribute('aria-pressed', 'true');
+      }
+
+      const surf = document.getElementById('alveoli-surfactant');
+      const arrows = document.getElementById('alveoli-gas-arrows');
+      if (surf) surf.setAttribute('stroke-width', key === 'neumocitos' ? '4.5' : '2.5');
+      if (arrows) arrows.setAttribute('opacity', key === 'vias' ? '0.45' : '1');
+
+      const d = alveoliData[key];
+      const titleEl = document.getElementById('alveoli-title');
+      const descEl = document.getElementById('alveoli-desc');
+      if (d && titleEl) titleEl.textContent = d.title;
+      if (d && descEl) descEl.textContent = d.desc;
+    }
+
+    // 10. Activity 4.2: Gowin's Vee Scenario Switcher
+    const gowinData = {
+      reposo: {
+        concept: `Estado basal: equilibrio entre ventilación alveolar y oxidación mitocondrial de glucosa y ácidos grasos.`,
+        method: `Indicador: ~12–16 respiraciones/min; cesión tisular basal de O₂ y excreción estable de CO₂.`,
+        event: `Acoplamiento entre la expansión diafragmática, el transporte eritrocitario de O₂ y la oxidación completa de carbohidratos, lípidos y proteínas provenientes de la dieta (Mejor con Salud, s. f.; Gil, 2010).`
+      },
+      ejercicio: {
+        concept: `Demanda aumentada: el nodo sinusal eleva el gasto cardíaco y el diafragma distiende los pulmones hasta 4,000–6,000 cm³.`,
+        method: `Indicador: incremento de frecuencia y volumen respiratorio para sostener la tasa de oxidación muscular aeróbica.`,
+        event: `Durante el ejercicio físico, el músculo esquelético incrementa el consumo de O₂ en la respiración tisular para oxidar glucógeno y ácidos grasos sin déficit energético (Benito, 2014; Sanders Smith, 2009).`
+      },
+      hipoxia: {
+        concept: `Restricción de la difusión: alteración del factor surfactante o menor perfusión capilar limita la homeostasis gaseosa.`,
+        method: `Indicador: seguimiento de concentraciones de O₂/CO₂ detecta caída en la eficiencia respiratoria y riesgo tisular.`,
+        event: `Al reducirse el intercambio en los alvéolos, disminuye el O₂ disponible en los tejidos, impidiendo la oxidación completa de los alimentos prescritos (UnADM, 2026; Drucker, 2005).`
+      }
+    };
+
+    function selectGowinState(key, btnEl) {
+      const parent = btnEl ? btnEl.parentElement : null;
+      if (parent) {
+        parent.querySelectorAll('.btn-tab').forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+      }
+      if (btnEl) {
+        btnEl.classList.add('is-active');
+        btnEl.setAttribute('aria-pressed', 'true');
+      }
+
+      const d = gowinData[key];
+      if (!d) return;
+      const cEl = document.getElementById('gowin-concept-dyn');
+      const mEl = document.getElementById('gowin-method-dyn');
+      const eEl = document.getElementById('gowin-event-dyn');
+      if (cEl) cEl.textContent = d.concept;
+      if (mEl) mEl.textContent = d.method;
+      if (eEl) eEl.textContent = d.event;
+    }
+
+    // 11. Scroll Reveal Observer
+    (function initReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      reveals.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>
